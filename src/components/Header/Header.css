@@ -1,0 +1,21 @@
+.dropdown-toggle::after{
+    margin-left: 1.5rem;
+}
+.img__avatar{
+    height: auto;
+    width: 30px;
+    border-radius: 25px;
+    margin-right: 5px;
+}
+.navbar__center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.navbar {
+    box-shadow: 0 0 15px rgb(0 0 0 / 30%)
+}
+.navbar-light{
+    background-color: rgba(255,255,255,.95)!important;
+}
