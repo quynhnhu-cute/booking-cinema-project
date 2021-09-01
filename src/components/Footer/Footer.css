@@ -3,6 +3,7 @@ footer{
     padding-top: 20px;
     padding-bottom: 20px;
     color: #949494;
+    height: auto
 }
 footer .icon__partner{
     border-radius: 50%;

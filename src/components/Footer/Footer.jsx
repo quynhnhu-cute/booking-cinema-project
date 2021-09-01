@@ -101,14 +101,14 @@ export default class Footer extends Component {
         </div>
         {/* Footer Links */}
         {/* Copyright */}
-        <hr className="hr__footer container"/>
+        <hr className="hr__footer container" />
         <div className="container">
           <div className="row">
             <div className="col-sm-1 col-xs-12 imgFooter">
               <img
-                className="vngIcon"
+                className="img-fluid"
                 src="https://tix.vn/app/assets/img/icons/zion-logo.jpg"
-                style={{ borderRadius: 8, width: '80px' }}
+                style={{ borderRadius: 8, width: "100px" }}
               />
             </div>
             <div className="col-sm-9 col-xs-12 info__footer text-left">
@@ -145,7 +145,7 @@ export default class Footer extends Component {
                   alt="Bộ Công Thương"
                   title
                   src="https://s3img.vcdn.vn/123phim/2020/03/d1e6bd560daa9e20131ea8a0f62e87f8.png"
-                  width='130px'
+                  width="130px"
                 />
               </a>
             </div>
