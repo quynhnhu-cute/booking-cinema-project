@@ -4,7 +4,6 @@ import "./Footer.css";
 
 export default class Footer extends Component {
   render() {
-    console.log(dataPartner);
     return (
       <footer className="page-footer font-small blue pt-4 footer__container">
         {/* Footer Links */}
