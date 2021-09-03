@@ -1,25 +1,19 @@
 import { movieApi } from "apis/movieApi";
+import Loader from "components/Loader/Loader";
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Slider from "react-slick";
+import { actCloseVideo, actFetchMovieWithPage, actHandleGetSrcVideo } from "./module/actions";
 import "./MovieList.css";
 
-export default class MovieList extends Component {
-  state = {
-    movieList1: [],
-    movieList2: [],
-    loading: true,
-    srcVideo: "",
-  };
+class MovieList extends Component {
+
   closeVideo() {
-      this.setState({
-        srcVideo: "",
-      })
-  }
-  handleGetSrcVideo(srcVideo) {
     this.setState({
-      srcVideo: srcVideo,
+      srcVideo: "",
     });
   }
+ 
   renderMovieList(movieList) {
     return movieList.map((movie) => {
       return (
@@ -32,7 +26,7 @@ export default class MovieList extends Component {
                 className="btnPlay"
                 data-toggle="modal"
                 data-target="#modelId"
-                onClick={() => this.handleGetSrcVideo(movie.trailer)}
+                onClick={() => this.props.handleGetSrcVideo(movie.trailer)}
               >
                 <img
                   src="https://tix.vn/app/assets/img/icons/play-video.png"
@@ -60,19 +54,18 @@ export default class MovieList extends Component {
       autoplay: false,
       autoplaySpeed: 3000,
     };
-    if (this.state.loading) return <div>Loading...</div>;
-    console.log(this.state.srcVideo);
+    if (this.props.loading) return <Loader />;
     return (
       <div className="container movielist">
         <Slider {...settings}>
           <div className="carousel__item">
             <div className="row">
-              {this.renderMovieList(this.state.movieList1.items)}
+              {this.renderMovieList(this.props.movieList1)}
             </div>
           </div>
           <div className="carousel__item">
             <div className="row">
-              {this.renderMovieList(this.state.movieList2.items)}
+              {this.renderMovieList(this.props.movieList2)}
             </div>
           </div>
         </Slider>
@@ -84,21 +77,23 @@ export default class MovieList extends Component {
           role="dialog"
           aria-labelledby="modelTitleId"
           aria-hidden="true"
-          onClick={()=>this.closeVideo()}
+          onClick={() => this.props.closeVideo()}
         >
           <div className="modal-dialog modal__custom" role="document">
             <div className="modal-content" disabled="true">
-            <button onClick={()=> this.closeVideo()}
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">×</span>
-                </button>
+              <button
+                onClick={() => this.props.closeVideo()}
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
               <div className="modal-body">
-                <iframe id="videoSrc"
-                  src={`${this.state.srcVideo}/?autoplay=1`}
+                <iframe
+                  id="videoSrc"
+                  src={`${this.props.srcVideo}/?autoplay=1`}
                   width="100%"
                   height="500px"
                   frameborder="0"
@@ -113,16 +108,31 @@ export default class MovieList extends Component {
     );
   }
   async componentDidMount() {
-    console.log(this.state.movieList1, this.state.movieList2);
+   
     try {
       const { data } = await movieApi.fetchMovieWithPageApi(1, 8);
       const { data: data2 } = await movieApi.fetchMovieWithPageApi(2, 8);
-      this.setState({
-        movieList1: data,
-        movieList2: data2,
-        loading: false,
-      });
-      console.log(this.state.movieList1, this.state.movieList2);
-    } catch {}
+      this.props.fetchMovieWithPage({ data, data2 });
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
+const mapStateToProps = (state) => ({
+  loading: state.movieListReducer.loading,
+  movieList1: state.movieListReducer.movieList1,
+  movieList2: state.movieListReducer.movieList2,
+  srcVideo: state.movieListReducer.srcVideo,
+})
+const mapDispatchToProps = (dispatch) => ({
+  fetchMovieWithPage: ({ data, data2 }) => {
+    dispatch(actFetchMovieWithPage({ data, data2 }));
+  },
+  handleGetSrcVideo: (srcVideo) => {
+    dispatch(actHandleGetSrcVideo(srcVideo))
+  },
+  closeVideo: () => {
+    dispatch(actCloseVideo())
+  }
+});
+export default connect(mapStateToProps, mapDispatchToProps)(MovieList);

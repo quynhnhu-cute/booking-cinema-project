@@ -5,7 +5,7 @@ export default class Header extends Component {
     return (
       <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light container-fluid">
         <a className="navbar-brand" href="#">
-          <img src="./image/web-logo.png" width="50px" />
+          <img src="https://tix.vn/app/assets/img/icons/web-logo.png" width="50px" />
         </a>
         <button
           className="navbar-toggler"
