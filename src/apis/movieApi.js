@@ -10,4 +10,9 @@ export const movieApi = {
       `QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=${GROUP_ID}&soTrang=${currentPage}&soPhanTuTrenTrang=${countInPage}`
     );
   },
+  fetchAllCinemaComplex: () => {
+    return callApi(
+      `QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${GROUP_ID}`
+    )
+  }
 };

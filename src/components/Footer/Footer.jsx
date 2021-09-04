@@ -32,13 +32,13 @@ export default class Footer extends Component {
               {/* Links */}
               <p className="text-uppercase">Đối tác</p>
               <div className="row d-flex flex-row wrap">
-                {dataPartner.partner.map((partner) => {
+                {dataPartner.partner.map((partner,index) => {
                   return (
-                    <div className="col-2 mb-2 ">
+                    <div className="col-2 mb-2" key={index}>
                       <a
                         target="_blank"
                         href={partner.homeAddress}
-                        title={partner.title}
+                        title={(partner.title).toString()}
                       >
                         <img
                           src={partner.imgSrc}
@@ -59,13 +59,13 @@ export default class Footer extends Component {
                 <div className="col-6">
                   <p>MOBILE APP</p>
                   <div className="row d-flex flex-row wrap">
-                    {dataPartner.mobileApp.map((partner) => {
+                    {dataPartner.mobileApp.map((partner,index) => {
                       return (
-                        <div className="col-2 mb-2 mr-2 ">
+                        <div className="col-2 mb-2 mr-2" key={index}> 
                           <a
                             target="_blank"
                             href={partner.homeAddress}
-                            title={partner.title}
+                            title={partner.title.toString()}
                           >
                             <img src={partner.imgSrc} width="25px" />
                           </a>
@@ -77,13 +77,13 @@ export default class Footer extends Component {
                 <div className="col-6">
                   <p>SOCIALS</p>
                   <div className="row d-flex flex-row wrap">
-                    {dataPartner.social.map((partner) => {
+                    {dataPartner.social.map((partner,index) => {
                       return (
-                        <div className="col-2 mb-2 mr-2 ">
+                        <div className="col-2 mb-2 mr-2" key={index}>
                           <a
                             target="_blank"
                             href={partner.homeAddress}
-                            title={partner.title}
+                            title={partner.title.toString()}
                           >
                             <img src={partner.imgSrc} width="25px" />
                           </a>
@@ -141,8 +141,6 @@ export default class Footer extends Component {
               >
                 <img
                   className="imgBoCo"
-                  alt="Bộ Công Thương"
-                  title
                   src="https://s3img.vcdn.vn/123phim/2020/03/d1e6bd560daa9e20131ea8a0f62e87f8.png"
                   width="130px"
                 />

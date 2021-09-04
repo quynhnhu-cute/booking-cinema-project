@@ -3,24 +3,28 @@ import Loader from "components/Loader/Loader";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Slider from "react-slick";
-import { actCloseVideo, actFetchMovieWithPage, actHandleGetSrcVideo } from "./module/actions";
+import {
+  actCloseVideo,
+  actFetchMovieWithPage,
+  actFetchMovieWithPageSuccess,
+  actHandleGetSrcVideo,
+} from "./module/actions";
 import "./MovieList.css";
 
 class MovieList extends Component {
-
   closeVideo() {
     this.setState({
       srcVideo: "",
     });
   }
- 
+
   renderMovieList(movieList) {
     return movieList.map((movie) => {
       return (
-        <div className="col-3 my-3">
+        <div className="col-3 my-3" key={movie.maPhim}>
           <div className="card movielist__card">
             <div className="movielist__img">
-              <img className="card-img-top" src={movie.hinhAnh} alt />
+              <img className="card-img-top" src={movie.hinhAnh}  />
               <div className="movielist__linear"></div>
               <button
                 className="btnPlay"
@@ -30,7 +34,7 @@ class MovieList extends Component {
               >
                 <img
                   src="https://tix.vn/app/assets/img/icons/play-video.png"
-                  alt=""
+              
                 />
               </button>
             </div>
@@ -80,7 +84,7 @@ class MovieList extends Component {
           onClick={() => this.props.closeVideo()}
         >
           <div className="modal-dialog modal__custom" role="document">
-            <div className="modal-content" disabled="true">
+            <div className="modal-content">
               <button
                 onClick={() => this.props.closeVideo()}
                 type="button"
@@ -96,7 +100,7 @@ class MovieList extends Component {
                   src={`${this.props.srcVideo}/?autoplay=1`}
                   width="100%"
                   height="500px"
-                  frameborder="0"
+                  frameBorder="0"
                   allowFullScreen
                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 ></iframe>
@@ -107,15 +111,8 @@ class MovieList extends Component {
       </div>
     );
   }
-  async componentDidMount() {
-   
-    try {
-      const { data } = await movieApi.fetchMovieWithPageApi(1, 8);
-      const { data: data2 } = await movieApi.fetchMovieWithPageApi(2, 8);
-      this.props.fetchMovieWithPage({ data, data2 });
-    } catch (err) {
-      console.log(err);
-    }
+  componentDidMount() {
+    this.props.fetchMovieWithPage();
   }
 }
 const mapStateToProps = (state) => ({
@@ -123,16 +120,16 @@ const mapStateToProps = (state) => ({
   movieList1: state.movieListReducer.movieList1,
   movieList2: state.movieListReducer.movieList2,
   srcVideo: state.movieListReducer.srcVideo,
-})
+});
 const mapDispatchToProps = (dispatch) => ({
-  fetchMovieWithPage: ({ data, data2 }) => {
-    dispatch(actFetchMovieWithPage({ data, data2 }));
+  fetchMovieWithPage: () => {
+    dispatch(actFetchMovieWithPage());
   },
   handleGetSrcVideo: (srcVideo) => {
-    dispatch(actHandleGetSrcVideo(srcVideo))
+    dispatch(actHandleGetSrcVideo(srcVideo));
   },
   closeVideo: () => {
-    dispatch(actCloseVideo())
-  }
+    dispatch(actCloseVideo());
+  },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(MovieList);

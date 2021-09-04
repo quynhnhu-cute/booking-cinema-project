@@ -20,8 +20,9 @@
 }
 .homeApp__carousel{
     position: absolute;
-    top: 11px;
-    right: 189px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     width: 193px;
     border-radius: 5px;
 }
