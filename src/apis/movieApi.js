@@ -3,16 +3,22 @@ import { callApi } from "utils/callApi";
 
 // movie api here
 export const movieApi = {
-  fetchMovieWithPageApi: (currentPage, countInPage) => {
+  fetchMovieByPageApi: (currentPage, countInPage) => {
     //currentPage: Số trang cần callApi
     //countInPage: Số phần tử (phim) trong 1 trang
     return callApi(
       `QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=${GROUP_ID}&soTrang=${currentPage}&soPhanTuTrenTrang=${countInPage}`
     );
   },
-  fetchAllCinemaComplex: () => {
+  fetchAllCinemaComplexApi: () => {
     return callApi(
       `QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${GROUP_ID}`
     )
+  },
+  fetchAllMovieApi: () => {
+    return callApi(`QuanLyPhim/LayDanhSachPhim?maNhom=${GROUP_ID}`)
+  },
+  fetchShowTimeByMovieApi: (movieId) => {
+    return callApi(`QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${movieId}`)
   }
 };

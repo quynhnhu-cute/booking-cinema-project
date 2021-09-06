@@ -3,6 +3,11 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: auto;
+    height: auto;
+}
+.homeApp .container{
+    margin: 0 auto;
+    padding: 5rem 0;
 }
 .homeApp__btn{
     background-color: #fb4226;

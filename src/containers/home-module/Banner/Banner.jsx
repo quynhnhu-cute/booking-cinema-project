@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Banner.css";
 import Slider from "react-slick";
+import SearchTool from "../SearchTool/SearchTool";
 
 export default class Banner extends Component {
   render() {
@@ -49,6 +50,7 @@ export default class Banner extends Component {
             </button>
           </div>
         </Slider>
+        <SearchTool />
       </div>
     );
   }

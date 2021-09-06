@@ -22,8 +22,8 @@ export const actFetchMovieWithPage = () => {
   return async (dispatch) => {
     dispatch(actFetchMovieWithPageRequest());
     try {
-      const { data } = await movieApi.fetchMovieWithPageApi(1, 8);
-      const { data: data2 } = await movieApi.fetchMovieWithPageApi(2, 8);
+      const { data } = await movieApi.fetchMovieByPageApi(1, 8);
+      const { data: data2 } = await movieApi.fetchMovieByPageApi(2, 8);
       dispatch(actFetchMovieWithPageSuccess({ data, data2 }));
     } catch (err) {
       dispatch(actFetchMovieWithPageFail(err))

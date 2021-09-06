@@ -7,7 +7,7 @@ export default class Footer extends Component {
     return (
       <footer className="page-footer font-small blue pt-4 footer__container">
         {/* Footer Links */}
-        <div className="container text-center text-md-left">
+        <div className="container footer__container text-center text-md-left">
           {/* Grid row */}
           <div className="row">
             {/* Grid column */}
@@ -34,7 +34,7 @@ export default class Footer extends Component {
               <div className="row d-flex flex-row wrap">
                 {dataPartner.partner.map((partner,index) => {
                   return (
-                    <div className="col-2 mb-2" key={index}>
+                    <div className="col-2 mb-3" key={index}>
                       <a
                         target="_blank"
                         href={partner.homeAddress}

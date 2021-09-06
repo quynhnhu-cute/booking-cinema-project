@@ -1,14 +1,16 @@
 import Loader from "components/Loader/Loader";
 import React, { Component } from "react";
+import './CinemaComplex.css'
 import { connect } from "react-redux";
+import {Link} from 'react-router-dom'
 import { actFetchAllCnmComplex } from "./module/actions";
 
 class CinemaComplex extends Component {
   render() {
     if (this.props.loading) return <Loader />;
     return (
-      <div className="container cinecomplex_container">
-        <div className="row">
+      <div className="container cinecomplex_container" id="cinemacomplex">
+        <div className="row cinecomplex__board">
           <div className="col-2">
             <div
               className="nav flex-column nav-pills"
@@ -64,9 +66,11 @@ class CinemaComplex extends Component {
                             aria-selected="true"
                             key={complexBrand.maCumRap}
                           >
-                            <p className="text-left">
+                            <p className="cinecomplex__text">
                               {complexBrand.tenCumRap}
                             </p>
+                            <p className="cinecomplex__text text-xs">{complexBrand.diaChi}</p>
+                            <Link to={`/cinema-detail/${complexBrand.maCumRap}`} className="text-link text-xs">[chi tiết]</Link>
                           </a>
                         );
                       })}
@@ -90,9 +94,12 @@ class CinemaComplex extends Component {
                       aria-labelledby="v-pills-home-tab"
                     >
                       {complexBrand.danhSachPhim.map((film) => {
-                        return <div key={film.maPhim} className="text-left">
+                        return <div key={film.maPhim} className="text-left mb-2">
                            <img src={film.hinhAnh} width='50px' height='50px' className='img-fluid' /> 
-                           <span>{film.tenPhim}</span>
+                           <div style={{display:"inline"}}>
+                           <span className="cinecomplex__text ml-2">{film.tenPhim}</span>
+                           <Link to={`/movie-detail/${film.maPhim}`} className="text-xs text-link">[chi tiết]</Link>
+                           </div>
                         </div>;
                       })}
                     </div>

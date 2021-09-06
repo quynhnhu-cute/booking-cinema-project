@@ -16,7 +16,7 @@ export default class HomeApp extends Component {
     };
     return (
       <div className="homeApp w-100">
-        <div className="container py-5">
+        <div className="container">
           <div className="row">
             <div className="col-6 d-flex align-items-center justify-content-center text-left py-5">
               <div>

@@ -21,8 +21,7 @@ export const actFetchAllCnmComplex = () => {
   return async (dispatch) => {
     dispatch(actFetchAllCnmComplexRequest());
     try {
-      const { data } = await movieApi.fetchAllCinemaComplex();
-      console.log(data)
+      const { data } = await movieApi.fetchAllCinemaComplexApi();
       dispatch(actFetchAllCnmComplexSuccess(data));
     } catch (err) {
       dispatch(actFetchAllCnmComplexFail(err));

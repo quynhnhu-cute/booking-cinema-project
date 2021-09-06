@@ -97,7 +97,7 @@ class MovieList extends Component {
               <div className="modal-body">
                 <iframe
                   id="videoSrc"
-                  src={`${this.props.srcVideo}/?autoplay=1`}
+                  src={`http://www.youtube.com/embed/${this.props.srcVideo}/?autoplay=1`}
                   width="100%"
                   height="500px"
                   frameBorder="0"
