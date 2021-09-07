@@ -1,11 +1,22 @@
 import React, { Component } from "react";
 import "./HomeApp.css";
 import Button from "components/Button/Button";
+import Slider from "react-slick";
 export default class HomeApp extends Component {
   render() {
+    const settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      arrows:false
+    };
     return (
       <div className="homeApp w-100">
-        <div className="container py-5">
+        <div className="container">
           <div className="row">
             <div className="col-6 d-flex align-items-center justify-content-center text-left py-5">
               <div>
@@ -52,7 +63,8 @@ export default class HomeApp extends Component {
                   data-interval="2000"
                 >
                   <div className="carousel-inner homeApp__carouselInner">
-                    <div className="carousel-item active">
+                  <Slider {...settings}>
+                  <div className="carousel-item active">
                       <img src="https://tix.vn/app/assets/img/icons/slide/slide16.jpg" className="d-block w-100" alt="..." />
                     </div>
                     <div className="carousel-item">
@@ -61,6 +73,7 @@ export default class HomeApp extends Component {
                     <div className="carousel-item">
                       <img src="https://tix.vn/app/assets/img/icons/slide/slide2.jpg" className="d-block w-100" alt="..." />
                     </div>
+                  </Slider>
                   </div>
                 </div>
               </div>

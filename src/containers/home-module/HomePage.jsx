@@ -9,11 +9,8 @@ import SearchTool from "./SearchTool/SearchTool";
 export default class HomePage extends Component {
   render() {
     return (
-      <div  style={{height:'auto'}}>
+      <div style={{ height: "auto" }}>
         <Banner />
-        <div className="search-tool">
-          <SearchTool />
-        </div>
         <MovieList />
         <CinemaComplex />
         <HomeNew />

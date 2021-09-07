@@ -3,11 +3,14 @@ footer{
     padding-top: 20px;
     padding-bottom: 20px;
     color: #949494;
-    height: auto
+    height: auto;
 }
 footer .icon__partner{
     border-radius: 50%;
     background-color: white;
+}
+footer .container{
+    margin: 0 auto
 }
 footer .icon__partner:hover {
     opacity: .7;

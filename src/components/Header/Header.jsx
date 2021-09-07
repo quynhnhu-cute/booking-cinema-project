@@ -1,12 +1,16 @@
 import React, { Component } from "react";
-import './Header.css'
+import { Link } from "react-router-dom";
+import "./Header.css";
 export default class Header extends Component {
   render() {
     return (
       <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light container-fluid">
-        <a className="navbar-brand" href="#">
-          <img src="./image/web-logo.png" width="50px" />
-        </a>
+        <Link className="navbar-brand" to="/">
+          <img
+            src="https://tix.vn/app/assets/img/icons/web-logo.png"
+            width="50px"
+          />
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -26,7 +30,7 @@ export default class Header extends Component {
               </a>
             </li>
             <li className="nav-item active">
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="#cinemacomplex">
                 Cụm rạp
               </a>
             </li>
@@ -42,9 +46,12 @@ export default class Header extends Component {
             </li>
           </ul>
           <ul className="navbar-nav ml-auto">
-          <li className="nav-item">
+            <li className="nav-item">
               <a className="nav-link" href="#">
-                <img src="https://tix.vn/app/assets/img/avatar.png"  className="img__avatar"/>
+                <img
+                  src="https://tix.vn/app/assets/img/avatar.png"
+                  className="img__avatar"
+                />
                 <span>Đăng nhập</span>
               </a>
             </li>
