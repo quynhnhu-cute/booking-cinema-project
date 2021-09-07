@@ -4,6 +4,7 @@ import {
   FETCH_ALL_MOVIE_SUCCESS,
   FETCH_SHOWTIME_BY_MOVIE_REQUEST,
   FETCH_SHOWTIME_BY_MOVIE_SUCCESS,
+  GET_CINEMA_COMPLEX_DATA,
 } from "./types";
 
 const initialState = {
@@ -31,6 +32,9 @@ const searchToolReducer = (state = initialState, { type, payload }) => {
       return { ...state, loading: false, cinemaList: payload };
     case FETCH_ALL_MOVIE_FAIL:
       return { ...state, loading: false, err: payload };
+      ////Lấy data cụm rạp chiếu phim  khi click chọn rạp
+      case GET_CINEMA_COMPLEX_DATA:
+        return {...state,dateList: payload.lichChieuPhim}
     default:
       return state;
   }

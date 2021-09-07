@@ -6,6 +6,7 @@ import {
   FETCH_SHOWTIME_BY_MOVIE_FAIL,
   FETCH_SHOWTIME_BY_MOVIE_REQUEST,
   FETCH_SHOWTIME_BY_MOVIE_SUCCESS,
+  GET_CINEMA_COMPLEX_DATA,
 } from "./types";
 
 //FetchAllMovie
@@ -49,6 +50,7 @@ export const actFetchShowTimeByMovie = (movieId) => {
       dispatch(actFetchShowTimeByMovieRequest())
       try {
         const {data} = await movieApi.fetchShowTimeByMovieApi(movieId)
+        console.log(data)
         dispatch(actFetchShowTimeByMovieSuccess(data))
       }
       catch (err) {
@@ -56,3 +58,8 @@ export const actFetchShowTimeByMovie = (movieId) => {
       }
   };
 };
+////Lấy data cụm rạp chiếu phim  khi click chọn rạp
+export const actCinemaComplexData = (data) => ({
+  type: GET_CINEMA_COMPLEX_DATA,
+  payload: data
+})

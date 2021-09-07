@@ -1,19 +1,37 @@
 import Loader from "components/Loader/Loader";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { actFetchAllMovie } from "./module/actions";
+import {
+  actCinemaComplexData,
+  actFetchAllMovie,
+  actFetchShowTimeByMovie,
+} from "./module/actions";
 import "./SearchTool.css";
 class SearchTool extends Component {
   state = {
-    valueDropdown : 'Phim'
-  }
-  handleChangeValue (movieName) {
+    valuePhim: "Phim",
+    valueRap: "Rạp",
+    valueNgay: "Ngày xem",
+    valueSuat: "Suất chiếu",
+  };
+  handleChangeValuePhim(value) {
     this.setState({
-      valueDropdown: movieName
-    })
+      valuePhim: value,
+    });
+  }
+  handleChangeValueRap(value) {
+    this.setState({
+      valueRap: value,
+    });
+  }
+  handleChangeValueNgay(value) {
+    this.setState({
+      valueNgay: value,
+    });
   }
   render() {
-    if(this.props.loading) return <Loader />
+    if (this.props.loading) return <Loader />;
+
     return (
       <div className="container searchtool">
         <div className="searchtool__box">
@@ -26,14 +44,24 @@ class SearchTool extends Component {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              {this.state.valueDropdown}
+              {this.state.valuePhim}
             </div>
             <div className="dropdown-menu" aria-labelledby="movieListDropdown">
-             {this.props.movieList.map(movie => {
-               return  <a className="dropdown-item" key={movie.maPhim} id={movie.maPhim} onClick={()=> this.handleChangeValue(movie.tenPhim)}>
-               {movie.tenPhim} 
-             </a>
-             })}
+              {this.props.movieList.map((movie) => {
+                return (
+                  <a
+                    className="dropdown-item"
+                    key={movie.maPhim}
+                    id={movie.maPhim}
+                    onClick={() => {
+                      this.handleChangeValuePhim(movie.tenPhim);
+                      this.props.fetchShowTimeByMovie(movie.maPhim);
+                    }}
+                  >
+                    {movie.tenPhim}
+                  </a>
+                );
+              })}
             </div>
           </div>
           <div className="dropdown searchtool__item">
@@ -45,12 +73,29 @@ class SearchTool extends Component {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              Rạp
+              {this.state.valueRap}
             </div>
             <div className="dropdown-menu" aria-labelledby="cinemaListDropdown">
-              <a className="dropdown-item" href="#">
-                {this.props.cinemaList.length === 0 ?  'Vui lòng chọn phim' : 'Vẽ mảng'}
-              </a>
+              {this.props.cinemaList.length === 0
+                ? "Vui lòng chọn phim"
+                : this.props.cinemaList.heThongRapChieu.map((heThongRap) => {
+                    return heThongRap.cumRapChieu.map((cumRap) => {
+                      return (
+                        <a
+                          className="dropdown-item"
+                          onClick={() => {
+                            this.handleChangeValueRap(cumRap.tenCumRap)
+                            this.props.getCinemaComplexData(cumRap)
+                          }
+                            
+                          }
+                          key={cumRap.maCumRap}
+                        >
+                          {cumRap.tenCumRap}
+                        </a>
+                      );
+                    });
+                  })}
             </div>
           </div>
           <div className="dropdown searchtool__item">
@@ -62,12 +107,23 @@ class SearchTool extends Component {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              Ngày xem
+              {this.state.valueNgay}
             </div>
             <div className="dropdown-menu" aria-labelledby="dateListDropdown">
-              <a className="dropdown-item" href="#">
-              {this.props.dateList.length === 0 ?  'Vui lòng chọn phim và rạp' : 'Vẽ mảng'}
-              </a>
+                {this.props.dateList.length === 0
+                  ? "Vui lòng chọn phim và rạp"
+                  : this.props.dateList.map((date) => {
+                    //date là lịch chiếu phim theo rạp đã chọn
+                    //chỗ này lấy được mã lịch chiếu
+                      return (
+                        <a className="dropdown-item" key={date.maLichChieu} onClick={()=> {
+                          this.handleChangeValueNgay(new Date(date.ngayChieuGioChieu).toLocaleTimeString())
+                        }}>
+                          {new Date(date.ngayChieuGioChieu).toLocaleTimeString()}
+                        </a>
+                      );
+                    })}
+
             </div>
           </div>
           <div div className="dropdown searchtool__item">
@@ -85,9 +141,11 @@ class SearchTool extends Component {
               className="dropdown-menu"
               aria-labelledby="showTimeListDropdown"
             >
-              <a className="dropdown-item" href="#">
-              {this.props.cinemaList.length === 0 ?  'Vui lòng chọn phim,rạp, ngày xem' : 'Vẽ mảng'}
-              </a>
+              {this.props.showTimeList.length === 0 ? (
+                "Vui lòng chọn phim,rạp, ngày xem"
+              ) : (
+                <a className="dropdown-item" href="#"></a>
+              )}
             </div>
           </div>
           <div className="btn btn-secondary searchtool__item">MUA VÉ NGAY</div>
@@ -96,7 +154,7 @@ class SearchTool extends Component {
     );
   }
   componentDidMount() {
-    this.props.fetchAllMovie()
+    this.props.fetchAllMovie();
   }
 }
 const mapStateToProps = (state) => ({
@@ -109,6 +167,13 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchAllMovie: () => {
     dispatch(actFetchAllMovie());
+  },
+  fetchShowTimeByMovie: (movieId) => {
+    dispatch(actFetchShowTimeByMovie(movieId));
+  },
+  //Lấy data rạp chiếu phim khi click vào chọn rạp
+  getCinemaComplexData: (data) => {
+    dispatch(actCinemaComplexData(data));
   },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(SearchTool);

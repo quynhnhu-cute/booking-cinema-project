@@ -19,7 +19,8 @@
     margin-right: 7px;
 }
 .dropdown-menu{
-    overflow: scroll;
+    overflow-y: scroll;
+    max-height: 300px;
 }
 
 .searchtool__box {
