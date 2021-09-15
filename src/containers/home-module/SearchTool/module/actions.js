@@ -50,7 +50,6 @@ export const actFetchShowTimeByMovie = (movieId) => {
       dispatch(actFetchShowTimeByMovieRequest())
       try {
         const {data} = await movieApi.fetchShowTimeByMovieApi(movieId)
-        console.log(data)
         dispatch(actFetchShowTimeByMovieSuccess(data))
       }
       catch (err) {

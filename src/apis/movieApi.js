@@ -20,5 +20,11 @@ export const movieApi = {
   },
   fetchShowTimeByMovieApi: (movieId) => {
     return callApi(`QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${movieId}`)
+  },
+  fetchMovieDetailApi: (movieId) => {
+    return callApi(`QuanLyPhim/LayThongTinPhim?MaPhim=${movieId}`)
+  },
+  fetchSeatPlanApi: (showTimeId) => {
+    return callApi(`QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${showTimeId}`)
   }
 };

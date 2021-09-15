@@ -18,7 +18,7 @@ class CinemaComplex extends Component {
               role="tablist"
               aria-orientation="vertical"
             >
-              {this.props.cinemaComplex.map((cnmComplex) => {
+              {this.props.cinemaComplex.map((cnmComplex,idx) => {
                 return (
                   <a
                     className="nav-link"

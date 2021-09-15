@@ -3,29 +3,26 @@ import Loader from "components/Loader/Loader";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Slider from "react-slick";
+import {Link} from 'react-router-dom'
 import {
   actCloseVideo,
   actFetchMovieWithPage,
-  actFetchMovieWithPageSuccess,
   actHandleGetSrcVideo,
 } from "./module/actions";
 import "./MovieList.css";
 
 class MovieList extends Component {
-  closeVideo() {
-    this.setState({
-      srcVideo: "",
-    });
-  }
+ 
 
   renderMovieList(movieList) {
+    console.log(this.props);
     return movieList.map((movie) => {
       return (
         <div className="col-3 my-3" key={movie.maPhim}>
           <div className="card movielist__card">
             <div className="movielist__img">
-              <img className="card-img-top" src={movie.hinhAnh}  />
-              <div className="movielist__linear"></div>
+              <img className="card-img-top img-fluid" src={movie.hinhAnh}  />
+              <Link to={`/movie-detail/${movie.maPhim}`} className="movielist__linear"></Link>
               <button
                 className="btnPlay"
                 data-toggle="modal"
@@ -39,8 +36,8 @@ class MovieList extends Component {
               </button>
             </div>
             <div className="card-body">
-              <h4 className="card-title">{movie.tenPhim}</h4>
-              <p className="card-text">Text</p>
+              <h4 className={`text-left ${movie.tenPhim.length < 15 ? 'text-title': 'text-title-s'}` }>{movie.tenPhim}</h4>
+              <p className="card-text text-left">Thời lượng: </p>
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import HomePage from "containers/home-module/HomePage";
 import Footer from "components/Footer/Footer";
 import MovieDetail from "containers/home-module/MovieDetail/MovieDetail";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import SeatPlan from "containers/home-module/SeatPlan/SeatPlan";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={HomePage} />
           <Route path="/movie-detail/:movieId" component={MovieDetail} />
+          <Route path="/seat-plan/:showTimeId" component={SeatPlan} />
         </Switch>
         <Footer />
       </Router>
