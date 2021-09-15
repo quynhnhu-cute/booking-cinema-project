@@ -21,6 +21,9 @@
 .dropdown-menu{
     overflow-y: scroll;
     max-height: 300px;
+    transform: none!important;
+    top: 45px!important;
+    left: -10px!important;
 }
 
 .searchtool__box {
@@ -38,6 +41,7 @@
     bottom:0;
     left: 50%;
     transform: translate(-50%,50%);
+    z-index: 1000;
 }
 .searchtool__item .dropdown-toggle::after {
     display: none;

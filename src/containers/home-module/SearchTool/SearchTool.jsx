@@ -1,5 +1,6 @@
-import Loader from "components/Loader/Loader";
 import React, { Component } from "react";
+import Loader from "components/Loader/Loader";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   actCinemaComplexData,
@@ -13,6 +14,7 @@ class SearchTool extends Component {
     valueRap: "Rạp",
     valueNgay: "Ngày xem",
     valueSuat: "Suất chiếu",
+    showTimeId: "",
   };
   handleChangeValuePhim(value) {
     this.setState({
@@ -27,6 +29,12 @@ class SearchTool extends Component {
   handleChangeValueNgay(value) {
     this.setState({
       valueNgay: value,
+    });
+  }
+  //Lấy mã lịch chiếu
+  getShowTimeId(showTimeId) {
+    this.setState({
+      showTimeId,
     });
   }
   render() {
@@ -84,11 +92,9 @@ class SearchTool extends Component {
                         <a
                           className="dropdown-item"
                           onClick={() => {
-                            this.handleChangeValueRap(cumRap.tenCumRap)
-                            this.props.getCinemaComplexData(cumRap)
-                          }
-                            
-                          }
+                            this.handleChangeValueRap(cumRap.tenCumRap);
+                            this.props.getCinemaComplexData(cumRap);
+                          }}
                           key={cumRap.maCumRap}
                         >
                           {cumRap.tenCumRap}
@@ -110,20 +116,28 @@ class SearchTool extends Component {
               {this.state.valueNgay}
             </div>
             <div className="dropdown-menu" aria-labelledby="dateListDropdown">
-                {this.props.dateList.length === 0
-                  ? "Vui lòng chọn phim và rạp"
-                  : this.props.dateList.map((date) => {
+              {this.props.dateList.length === 0
+                ? "Vui lòng chọn phim và rạp"
+                : this.props.dateList.map((date) => {
                     //date là lịch chiếu phim theo rạp đã chọn
                     //chỗ này lấy được mã lịch chiếu
-                      return (
-                        <a className="dropdown-item" key={date.maLichChieu} onClick={()=> {
-                          this.handleChangeValueNgay(new Date(date.ngayChieuGioChieu).toLocaleTimeString())
-                        }}>
-                          {new Date(date.ngayChieuGioChieu).toLocaleTimeString()}
-                        </a>
-                      );
-                    })}
-
+                    return (
+                      <a
+                        className="dropdown-item"
+                        key={date.maLichChieu}
+                        onClick={() => {
+                          this.getShowTimeId(date.maLichChieu);
+                          this.handleChangeValueNgay(
+                            new Date(
+                              date.ngayChieuGioChieu
+                            ).toLocaleDateString()
+                          );
+                        }}
+                      >
+                        {new Date(date.ngayChieuGioChieu).toLocaleDateString()}
+                      </a>
+                    );
+                  })}
             </div>
           </div>
           <div div className="dropdown searchtool__item">
@@ -148,7 +162,7 @@ class SearchTool extends Component {
               )}
             </div>
           </div>
-          <div className="btn btn-secondary searchtool__item">MUA VÉ NGAY</div>
+          <Link to={`/seat-plan/${this.state.showTimeId}`} className="btn btn-secondary searchtool__item">MUA VÉ NGAY</Link>
         </div>
       </div>
     );
