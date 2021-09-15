@@ -10,9 +10,9 @@ class SeatPlan extends Component {
   };
 
   render() {
-    const handleSelectSeat = (arrDanhSachGhe, helo) => {
+    const handleSelectSeat = (arrDanhSachGhe, seatId) => {
       const idx = arrDanhSachGhe.findIndex((seat) => {
-        return seat.maGhe === helo;
+        return seat.maGhe === seatId;
       });
       console.log(idx);
       if (idx !== -1) {
@@ -38,9 +38,7 @@ class SeatPlan extends Component {
                       <button
                         disabled={seat.daDat}
                         className={`seatplan__seat ${
-                          this.state.btnStatus
-                            ? "selectingSeat"
-                            : seat.loaiGhe === "Vip"
+                            seat.loaiGhe === "Vip"
                             ? "vipSeat"
                             : "normalSeat"
                         }`}
