@@ -6,7 +6,7 @@ import './HomeNew.css'
 export default class HomeNew extends Component {
   render() {
     return (
-        <div className="container homenew">
+        <div className="container homenew" id="homeNew">
           <nav>
             <div className="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
               <a
