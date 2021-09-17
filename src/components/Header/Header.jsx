@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 export default class Header extends Component {
+ 
   render() {
+    
     return (
       <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light container-fluid">
         <Link className="navbar-brand" to="/">
@@ -25,7 +27,7 @@ export default class Header extends Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav navbar__center">
             <li className="nav-item active">
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="#movieList">
                 Lịch chiếu
               </a>
             </li>
@@ -35,24 +37,30 @@ export default class Header extends Component {
               </a>
             </li>
             <li className="nav-item active">
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="#homeNew">
                 Tin tức
               </a>
             </li>
             <li className="nav-item active">
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="#homeapp">
                 Ứng dụng
               </a>
             </li>
           </ul>
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <a className="nav-link d-flex justify-content-center align-items-center" href="#">
                 <img
                   src="https://tix.vn/app/assets/img/avatar.png"
                   className="img__avatar"
                 />
                 <span>Đăng nhập</span>
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+              
+                <span>Đăng kí</span>
               </a>
             </li>
             <li className="nav-item dropdown">

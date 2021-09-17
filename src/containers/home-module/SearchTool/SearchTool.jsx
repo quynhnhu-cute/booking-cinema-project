@@ -155,14 +155,19 @@ class SearchTool extends Component {
               className="dropdown-menu"
               aria-labelledby="showTimeListDropdown"
             >
-              {this.props.showTimeList.length === 0 ? (
+              {this.props.dateList.length === 0 ? (
                 "Vui lòng chọn phim,rạp, ngày xem"
               ) : (
-                <a className="dropdown-item" href="#"></a>
+                <a className="dropdown-item" href="#">Không có dữ liệu Api</a>
               )}
             </div>
           </div>
-          <Link to={`/seat-plan/${this.state.showTimeId}`} className="btn btn-secondary searchtool__item">MUA VÉ NGAY</Link>
+          <Link
+            to={this.state.showTimeId === ''? '' : `/seat-plan/${this.state.showTimeId}`}
+            className="btn btn-secondary searchtool__item"
+          >
+            MUA VÉ NGAY
+          </Link>
         </div>
       </div>
     );

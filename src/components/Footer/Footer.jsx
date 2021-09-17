@@ -7,7 +7,7 @@ export default class Footer extends Component {
     return (
       <footer className="page-footer font-small blue pt-4 footer__container">
         {/* Footer Links */}
-        <div className="container footer__container text-center text-md-left">
+        <div className="container text-center text-md-left">
           {/* Grid row */}
           <div className="row">
             {/* Grid column */}

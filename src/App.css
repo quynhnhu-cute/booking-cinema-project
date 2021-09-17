@@ -29,7 +29,8 @@
 }
 .container{
   max-width: 80%;
-  margin: 100px auto;
+  padding-top:100px;
+  padding-bottom: 100px;
 }
 @keyframes App-logo-spin {
   from {

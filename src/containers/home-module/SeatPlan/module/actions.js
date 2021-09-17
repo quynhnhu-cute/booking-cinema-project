@@ -1,5 +1,6 @@
 import { movieApi } from "apis/movieApi";
 import {
+  CHOOSE_SEAT,
   FETCH_SEAT_PLAN_FAIL,
   FETCH_SEAT_PLAN_REQUEST,
   FETCH_SEAT_PLAN_SUCCESS,
@@ -16,6 +17,8 @@ const actFetchSeatPlanFail = (err) => ({
   type: FETCH_SEAT_PLAN_FAIL,
   payload: err,
 });
+
+//CallApi suất chiếu param showtimeId -> seatPlan []
 export const actFetchSeatPlan = (showTimeId) => {
   return async (dispatch) => {
     dispatch(actFetchSeatPlanRequest());
@@ -28,3 +31,10 @@ export const actFetchSeatPlan = (showTimeId) => {
     }
   };
 };
+
+//Chức năng đặt (chọn ghế)
+
+export const actChooseSeat = (seat) => ({
+  type: CHOOSE_SEAT,
+  payload: seat,
+})
