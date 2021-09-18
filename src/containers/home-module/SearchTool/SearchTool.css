@@ -43,10 +43,6 @@
     transform: translate(-50%,50%);
     z-index: 1000;
 }
-.searchtool{
-    padding-bottom: 0;
-    padding-top: 0;
-}
 .searchtool__item .dropdown-toggle::after {
     display: none;
 }

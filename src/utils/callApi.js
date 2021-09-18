@@ -9,3 +9,6 @@ export const callApi = (endpoint, method = 'GET', data) => {
         data
     })
 }
+
+// API POST 
+

@@ -5,10 +5,6 @@ footer{
     color: #949494;
     height: auto;
 }
-.footer__container .container{
-    padding-top: 0;
-    padding-bottom: 0;
-}
 footer .icon__partner{
     border-radius: 50%;
     background-color: white;

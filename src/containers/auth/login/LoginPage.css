@@ -1,0 +1,55 @@
+*{
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+.login-bg{ 
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+}
+
+.margin-bottom{
+    margin-bottom: 10px;
+}
+
+.formation{
+    position: absolute;
+    width: 35%;
+   top: 20%;
+  color: white;
+   right: 35%;
+   height: 70vh;
+   padding-top: 30px;
+
+   /* text-align: center; */
+}
+
+.color-white{
+    color: white;
+}
+.ant-form-item-label label{
+    color: white;
+}
+
+.color-wheat{
+    color: wheat;
+}
+
+.login-form-button{
+    width: 60%;
+}
+
+.span-deco{
+    color: white;
+    background-color: rgb(243, 44, 44);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.register-button{
+    background-color: rgb(243, 44, 44);
+    color: white;
+}

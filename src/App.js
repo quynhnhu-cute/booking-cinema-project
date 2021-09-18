@@ -1,23 +1,34 @@
-import logo from "./logo.svg";
-import "./App.css";
-import Header from "components/Header/Header";
-import HomePage from "containers/home-module/HomePage";
-import Footer from "components/Footer/Footer";
-import MovieDetail from "containers/home-module/MovieDetail/MovieDetail";
+
+import 'antd/dist/antd.css';
+import Header from 'components/Header/Header';
+import PageNotFound from 'containers/shares/PageNotFound';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import SeatPlan from "containers/home-module/SeatPlan/SeatPlan";
+import { adminRoutes, clientRoutes } from 'routes';
+import './App.css';
+
 
 function App() {
+  const renderRoutes = routes =>{
+    return routes.map(route =>{
+      const {path, component, exact} = route;
+      return (
+        <Route path={path} exact={exact} component={component}/>
+      )
+    })
+  }
   return (
     <div className="App">
+      {/* <TopBar className="top-bar"/>
+      <SideBar className="side-bar"/> */}
+      
       <Router>
         <Header />
         <Switch>
-          <Route path="/" exact component={HomePage} />
-          <Route path="/movie-detail/:movieId" component={MovieDetail} />
-          <Route path="/seat-plan/:showTimeId" component={SeatPlan} />
+            {renderRoutes(clientRoutes)}
+            {renderRoutes(adminRoutes)}
+            <Route path="*" component={PageNotFound}/>
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </Router>
     </div>
   );

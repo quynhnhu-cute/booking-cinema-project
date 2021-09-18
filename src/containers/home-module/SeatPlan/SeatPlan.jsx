@@ -2,11 +2,25 @@ import Loader from "components/Loader/Loader";
 import React, { Component } from "react";
 import { Fragment } from "react";
 import { connect } from "react-redux";
-import { actChooseSeat, actFetchSeatPlan } from "./module/actions";
+import { actFetchSeatPlan } from "./module/actions";
 import "./SeatPlan.css";
-import _ from "lodash";
 class SeatPlan extends Component {
+  state = {
+    btnStatus: false,
+  };
+
   render() {
+    const handleSelectSeat = (arrDanhSachGhe, seatId) => {
+      const idx = arrDanhSachGhe.findIndex((seat) => {
+        return seat.maGhe === seatId;
+      });
+      console.log(idx);
+      if (idx !== -1) {
+        this.setState({
+          btnStatus: !this.state.btnStatus,
+        });
+      }
+    };
     const { danhSachGhe } = this.props.seatPlan;
     if (this.props.loading) return <Loader></Loader>;
     return (
@@ -19,25 +33,18 @@ class SeatPlan extends Component {
               </div>
               <div className="seatplan__seatbox">
                 {danhSachGhe.map((seat, index) => {
-                  let choosingSeat = "choosingSeat";
-                  let idx = this.props.arrChoosingSeat.findIndex(
-                    (seatChoosing) => {
-                      return seat.maGhe === seatChoosing.maGhe;
-                    }
-                  );
-                  if (idx !== -1) {
-                    choosingSeat = "choosingSeat";
-                  } else {
-                    choosingSeat = "";
-                  }
                   return (
                     <Fragment key={seat.stt}>
                       <button
                         disabled={seat.daDat}
                         className={`seatplan__seat ${
-                          seat.loaiGhe === "Vip" ? "vipSeat" : "normalSeat"
-                        } ${choosingSeat}`}
-                        onClick={() => this.props.chooseSeat(seat)}
+                            seat.loaiGhe === "Vip"
+                            ? "vipSeat"
+                            : "normalSeat"
+                        }`}
+                        onClick={() =>
+                          handleSelectSeat(danhSachGhe, seat.maGhe)
+                        }
                       >
                         {seat.daDat ? "X" : seat.tenGhe}
                       </button>
@@ -85,16 +92,7 @@ class SeatPlan extends Component {
                 </div>
                 <div className="row seatplan__tbrow seatplan__tbchoose">
                   <div className="col-6 seatplan__tbtitle">Ghế chọn</div>
-                  <div className="col-6 text-right">
-
-                    
-                    { // _. : lodash
-                    _.sortBy(this.props.arrChoosingSeat, ["tenGhe"]).map(
-                      (seat) => {
-                        return <span key={seat.maGhe}>{seat.tenGhe}, </span>;
-                      }
-                    )}
-                  </div>
+                  <div className="col-6 text-right"></div>
                 </div>
                 <div className="row seatplan__tbrow">
                   <div className="col-6 seatplan__tbtitle">Ưu đãi</div>
@@ -102,14 +100,7 @@ class SeatPlan extends Component {
                 </div>
                 <div className="row seatplan__tbrow">
                   <div className="col-6 seatplan__tbtitle">Tổng tiền</div>
-                  <div className="col-6 text-right">
-                    {this.props.arrChoosingSeat
-                      .reduce((sum, seat) => {
-                        return (sum += seat.giaVe);
-                      }, 0)
-                      .toLocaleString()}{" "}
-                    đ
-                  </div>
+                  <div className="col-6 text-right"></div>
                 </div>
                 <div className="row seatplan__tbrow">
                   <button className="col seatplan__button">
@@ -130,16 +121,10 @@ class SeatPlan extends Component {
 const mapStateToProps = (state) => ({
   loading: state.seatPlanReducer.loading,
   seatPlan: state.seatPlanReducer.seatPlan,
-  arrChoosingSeat: state.seatPlanReducer.arrChoosingSeat,
 });
 const mapDispatchToProps = (dispatch) => ({
-  //call api
   fetchSeatPlan: (showTimeId) => {
     dispatch(actFetchSeatPlan(showTimeId));
-  },
-  //Chức năng chọn ghế params seat(ghế đang chọn) -> payload: seat
-  chooseSeat: (seat) => {
-    dispatch(actChooseSeat(seat));
   },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(SeatPlan);

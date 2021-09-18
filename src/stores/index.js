@@ -4,20 +4,36 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import movieListReducer from "containers/home-module/MovieList/module/reducer";
 import cinemaComplexReducer from "containers/home-module/CinemaComplex/module/reducer";
 import searchToolReducer from "containers/home-module/SearchTool/module/reducer";
+import authReducer from "containers/auth/module/reducer";
 import movieDetailReducer from "containers/home-module/MovieDetail/module/reducer";
 import seatPlanReducer from "containers/home-module/SeatPlan/module/reducer";
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 const rootReducer = combineReducers({
   movieListReducer,
   cinemaComplexReducer,
   searchToolReducer,
+  authReducer,
   movieDetailReducer,
   seatPlanReducer,
 });
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['authReducer']
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const store = createStore(
-  rootReducer,
+  persistedReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
 
-export default store;
+
+
+
+const persistor = persistStore(store)
+
+export { store, persistor };

@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -29,8 +29,7 @@
 }
 .container{
   max-width: 80%;
-  padding-top:100px;
-  padding-bottom: 100px;
+  margin: 100px auto;
 }
 @keyframes App-logo-spin {
   from {
@@ -39,4 +38,13 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.top-bar{
+  z-index: 10;
 }
+
+.side-bar{
+  z-index: 0;
+}
+
