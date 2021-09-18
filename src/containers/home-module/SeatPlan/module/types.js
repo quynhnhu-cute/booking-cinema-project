@@ -1,0 +1,6 @@
+//CallApi 
+export const FETCH_SEAT_PLAN_REQUEST = 'FETCH_SEAT_PLAN_REQUEST'
+export const FETCH_SEAT_PLAN_SUCCESS = 'FETCH_SEAT_PLAN_SUCCESS'
+export const FETCH_SEAT_PLAN_FAIL = 'FETCH_SEAT_PLAN_FAIL'
+//Chức năng đặt ghế
+export const CHOOSE_SEAT = 'CHOOSE_SEAT'
