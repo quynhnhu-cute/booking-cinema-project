@@ -39,7 +39,7 @@ class SeatPlan extends Component {
                         } ${choosingSeat}`}
                         onClick={() => this.props.chooseSeat(seat)}
                       >
-                        {seat.daDat ? "X" : seat.tenGhe}
+                        {seat.daDat ? "x" : seat.tenGhe}
                       </button>
 
                       {(index + 1) % 16 === 0 ? <br /> : ""}
