@@ -4,7 +4,7 @@ import "./TopBar.css";
 export default class TopBar extends Component {
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between all">
         <a className="navbar-brand" href="#">
           <img src="./ticket.jfif" className="icon" />
           <span className="header">Booking Cinema</span>

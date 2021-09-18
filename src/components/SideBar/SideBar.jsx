@@ -11,7 +11,6 @@ import "./SideBar.css";
 const { SubMenu } = Menu;
 
 export default class SideBar extends Component {
-
     state = {
         collapsed: false,
     };
@@ -29,7 +28,7 @@ export default class SideBar extends Component {
                     {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
                 </Button>
                 <Menu
-                    defaultSelectedKeys={['1']}
+                    defaultSelectedKeys={[`${this.props.defaultIndex}`]}
                     mode="inline"
                     inlineCollapsed={this.state.collapsed}
                     className="menu"
