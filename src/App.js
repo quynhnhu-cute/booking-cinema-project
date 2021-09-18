@@ -1,6 +1,7 @@
 
 import 'antd/dist/antd.css';
 import Header from 'components/Header/Header';
+import Footer from 'components/Footer/Footer'
 import PageNotFound from 'containers/shares/PageNotFound';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { adminRoutes, clientRoutes } from 'routes';
@@ -22,13 +23,13 @@ function App() {
       <SideBar className="side-bar"/> */}
       
       <Router>
-        {/* <Header /> */}
+        <Header />
         <Switch>
             {renderRoutes(clientRoutes)}
             {renderRoutes(adminRoutes)}
             <Route path="*" component={PageNotFound}/>
         </Switch>
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </div>
   );

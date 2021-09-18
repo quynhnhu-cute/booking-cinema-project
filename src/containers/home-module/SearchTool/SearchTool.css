@@ -1,4 +1,4 @@
-.dropdown__button {
+.searchtool__box .dropdown__button {
     outline: none;
     border: none;
     background-color: transparent;
@@ -18,12 +18,13 @@
     border-right: 1px solid #ebebec;
     margin-right: 7px;
 }
-.dropdown-menu{
+.searchtool__box .dropdown-menu{
     overflow-y: scroll;
     max-height: 300px;
     transform: none!important;
     top: 45px!important;
     left: -10px!important;
+    margin: 0;
 }
 
 .searchtool__box {

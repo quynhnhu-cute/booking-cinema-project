@@ -24,7 +24,7 @@ export const clientRoutes = [
         exact: false,
     },  
     {
-        path: '/seat-plan/:showTimeIdtail/:movieId',
+        path: '/seat-plan/:showTimeId',
         component: SeatPlan,
         exact: false,
     },  

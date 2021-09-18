@@ -27,10 +27,7 @@
 .App-link {
   color: #61dafb;
 }
-.container{
-  max-width: 80%;
-  margin: 100px auto;
-}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -39,6 +36,10 @@
     transform: rotate(360deg);
   }
 } */
+.container{
+  max-width: 80%;
+  margin: 100px auto;
+}
 
 .top-bar{
   z-index: 10;

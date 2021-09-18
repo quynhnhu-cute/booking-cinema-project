@@ -65,6 +65,10 @@
     border: 1px solid #fff;
     color: #fff;
     width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 .seatplan__table .seatplan__tbrow {
     width: 80%;
@@ -72,6 +76,9 @@
     display: inline-flex;
     padding: 15px 0;
     flex-wrap: nowrap;
+}
+.seatplan__table .seatplan__tbrow:last-child{
+    border-bottom: none;
 }
 .seatplan__table .seatplan__tbchoose{
     height: 100px;

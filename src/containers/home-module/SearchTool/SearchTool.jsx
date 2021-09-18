@@ -162,7 +162,7 @@ class SearchTool extends Component {
               )}
             </div>
           </div>
-          <Link to={`/seat-plan/${this.state.showTimeId}`} className="btn btn-secondary searchtool__item">MUA VÉ NGAY</Link>
+          <Link to={this.state.showTimeId === ''? "" : `/seat-plan/${this.state.showTimeId}`} className="btn btn-secondary searchtool__item">MUA VÉ NGAY</Link>
         </div>
       </div>
     );

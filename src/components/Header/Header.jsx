@@ -35,17 +35,17 @@ class Header extends Component {
                 Lịch chiếu
               </a>
             </li>
-            <li className="nav-item active">
+            <li className="nav-item">
               <a className="nav-link" href="#cinemacomplex">
                 Cụm rạp
               </a>
             </li>
-            <li className="nav-item active">
+            <li className="nav-item">
               <a className="nav-link" href="#">
                 Tin tức
               </a>
             </li>
-            <li className="nav-item active">
+            <li className="nav-item">
               <a className="nav-link" href="#">
                 Ứng dụng
               </a>
@@ -66,7 +66,7 @@ class Header extends Component {
                     </a>
                   
                 ) : (
-                  <Link to="/login">
+                  <Link to="/login" className="login__button">
                     <img
                      src="https://tix.vn/app/assets/img/avatar.png"
                      className="img__avatar"
@@ -75,6 +75,11 @@ class Header extends Component {
                   </Link>
                 )}
               {/* </a> */}
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                Đăng kí
+              </a>
             </li>
             <li className="nav-item dropdown">
               <a
