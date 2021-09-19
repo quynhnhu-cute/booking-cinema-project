@@ -40,7 +40,7 @@ class LoginPage extends Component {
             <div className="alert alert-danger">{this.props.error}</div>
           )}
           <Form.Item
-            className="pb-4"
+            className="pb-4 login-label"
             label="Tên đăng nhập"
             name="taiKhoan"
             rules={[
@@ -56,7 +56,7 @@ class LoginPage extends Component {
             />
           </Form.Item>
           <Form.Item
-            className="pb-3"
+            className="pb-3 login-label"
             label="Mật khẩu"
             name="matKhau"
             rules={[

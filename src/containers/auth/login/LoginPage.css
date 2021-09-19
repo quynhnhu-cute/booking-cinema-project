@@ -26,7 +26,7 @@
 .color-white{
     color: white;
 }
-.ant-form-item-label label{
+.login-label .ant-form-item-label label{
     color: white;
 }
 

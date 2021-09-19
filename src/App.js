@@ -23,13 +23,13 @@ function App() {
       <SideBar className="side-bar"/> */}
       
       <Router>
-        <Header />
+        {/* <Header /> */}
         <Switch>
             {renderRoutes(clientRoutes)}
             {renderRoutes(adminRoutes)}
             <Route path="*" component={PageNotFound}/>
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </Router>
     </div>
   );
