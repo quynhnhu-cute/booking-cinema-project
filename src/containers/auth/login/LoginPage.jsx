@@ -46,7 +46,7 @@ class LoginPage extends Component {
             rules={[
               {
                 required: true,
-                message: "Please input your Username!",
+                message: "Tài khoản không được trống!",
               },
             ]}
           >
@@ -62,7 +62,7 @@ class LoginPage extends Component {
             rules={[
               {
                 required: true,
-                message: "Please input your Password!",
+                message: "Phải có mật khẩu!",
               },
             ]}
           >
