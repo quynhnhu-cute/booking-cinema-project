@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { Link , withRouter} from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./Header.css";
 import { connect } from "react-redux";
 import { actLogOut } from "containers/auth/module/action";
 class Header extends Component {
   handleLogout = () => {
     this.props.logout();
-    this.props.history.push('/');
-  }
+    this.props.history.push("/");
+  };
   render() {
     return (
       <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light container-fluid">
@@ -52,35 +52,61 @@ class Header extends Component {
             </li>
           </ul>
           <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
+            
               {/* <a className="nav-link" href="#"> */}
-               
-                {this.props.currentUser ? (
-                    <a className="nav-link" href="#">
-                         <img
-                     src="https://picsum.photos/200"
-                     className="img__avatar"
-                   />
-                      
-                    <span>{this.props.currentUser.hoTen}</span>
-                    </a>
-                  
-                ) : (
-                  <Link to="/login" className="login__button">
+
+              {this.props.currentUser ? (
+               <li className="nav-item dropdown">
+                  <a
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    id="userDropdown"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
                     <img
-                     src="https://tix.vn/app/assets/img/avatar.png"
-                     className="img__avatar"
-                   />
-                    <span>Đăng nhập</span>
-                  </Link>
-                )}
+                      src="https://picsum.photos/200"
+                      className="img__avatar"
+                    />
+
+                    <span>{this.props.currentUser.hoTen}</span>
+                  </a>
+                  <div className="dropdown-menu" aria-labelledby="userDropdown">
+                    <Link className="dropdown-item" to="/edit-profile">
+                      Thay đổi thông tin
+                    </Link>
+                    <a
+                      className="dropdown-item"
+                      href="#"
+                      onClick={this.handleLogout}
+                    >
+                      Đăng xuất
+                    </a>
+                  </div>
+               </li>
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <Link to="/login" className="login__button">
+                      <img
+                        src="https://tix.vn/app/assets/img/avatar.png"
+                        className="img__avatar"
+                      />
+                      <span>Đăng nhập</span>
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/register">
+                      Đăng kí
+                    </Link>
+                  </li>
+                </>
+              )}
               {/* </a> */}
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Đăng kí
-              </a>
-            </li>
+            
+
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
@@ -106,7 +132,6 @@ class Header extends Component {
                 </a>
               </div>
             </li>
-            {this.props.currentUser && <li><a className="nav-link" onClick={this.handleLogout}>Logout</a></li>}
           </ul>
         </div>
       </nav>
@@ -118,8 +143,8 @@ const mapStateToProps = (state) => ({
   currentUser: state.authReducer.currentUser,
 });
 
-const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(actLogOut())
-})
+const mapDispatchToProps = (dispatch) => ({
+  logout: () => dispatch(actLogOut()),
+});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
