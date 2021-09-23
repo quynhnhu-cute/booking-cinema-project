@@ -1,6 +1,6 @@
 import userApi from "apis/userApi";
 
-const { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT } = require("./type")
+const { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT, EDIT_PROFILE } = require("./type")
 
 const actLoginRequest = () =>({
     type: LOGIN_REQUEST
@@ -34,4 +34,9 @@ export const actLogin = (user, history) =>{
 export const actLogOut = () =>({
     type: LOG_OUT,
     payload: null
+})
+
+export const actEditProfile = (userProfileUpdate) => ({
+    type: EDIT_PROFILE,
+    payload: userProfileUpdate
 })

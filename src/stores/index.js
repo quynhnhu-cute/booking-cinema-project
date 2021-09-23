@@ -7,6 +7,7 @@ import searchToolReducer from "containers/home-module/SearchTool/module/reducer"
 import authReducer from "containers/auth/module/reducer";
 import movieDetailReducer from "containers/home-module/MovieDetail/module/reducer";
 import seatPlanReducer from "containers/home-module/SeatPlan/module/reducer";
+import userProfileReducer from "containers/auth/profileUser/EditProfile/module/reducer";
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   authReducer,
   movieDetailReducer,
   seatPlanReducer,
+  userProfileReducer,
 });
 const persistConfig = {
   key: 'root',
