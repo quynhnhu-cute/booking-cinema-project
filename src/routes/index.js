@@ -6,12 +6,24 @@ import HomePage from "containers/home-module/HomePage"
 import MovieDetail from "containers/home-module/MovieDetail/MovieDetail"
 import LoginPage from "containers/auth/login/LoginPage"
 import SeatPlan from "containers/home-module/SeatPlan/SeatPlan"
-import { Notification } from "utils/notification"
+
+import Register from "containers/auth/register/Register"
+import EditProfile from "containers/auth/profileUser/EditProfile/EditProfile"
 
 export const clientRoutes = [
     {
         path: '/login',
         component: LoginPage,
+        exact: true,
+    },
+    {
+        path: '/register',
+        component: Register,
+        exact: true,
+    },
+    {
+        path: '/edit-profile',
+        component: EditProfile,
         exact: true,
     },
     {

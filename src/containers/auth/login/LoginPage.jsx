@@ -14,7 +14,7 @@ class LoginPage extends Component {
   };
 
   render() {
-    if (this.props.loading) return <Loader />;
+    if (this.props.loading) return <Loader></Loader>
     return (
       <div>
         <img
