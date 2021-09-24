@@ -6,6 +6,7 @@ import HomePage from "containers/home-module/HomePage"
 import MovieDetail from "containers/home-module/MovieDetail/MovieDetail"
 import LoginPage from "containers/auth/login/LoginPage"
 import SeatPlan from "containers/home-module/SeatPlan/SeatPlan"
+import { Notification } from "utils/notification"
 
 export const clientRoutes = [
     {
@@ -28,6 +29,8 @@ export const clientRoutes = [
         component: SeatPlan,
         exact: false,
     },  
+   
+
     
     
 ]
