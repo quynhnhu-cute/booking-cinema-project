@@ -40,13 +40,13 @@ class LoginPage extends Component {
             <div className="alert alert-danger">{this.props.error}</div>
           )}
           <Form.Item
-            className="pb-4"
+            className="pb-4 login-label"
             label="Tên đăng nhập"
             name="taiKhoan"
             rules={[
               {
                 required: true,
-                message: "Please input your Username!",
+                message: "Tài khoản không được trống!",
               },
             ]}
           >
@@ -56,13 +56,13 @@ class LoginPage extends Component {
             />
           </Form.Item>
           <Form.Item
-            className="pb-3"
+            className="pb-3 login-label"
             label="Mật khẩu"
             name="matKhau"
             rules={[
               {
                 required: true,
-                message: "Please input your Password!",
+                message: "Phải có mật khẩu!",
               },
             ]}
           >

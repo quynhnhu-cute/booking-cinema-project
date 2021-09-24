@@ -6,6 +6,7 @@ import HomePage from "containers/home-module/HomePage"
 import MovieDetail from "containers/home-module/MovieDetail/MovieDetail"
 import LoginPage from "containers/auth/login/LoginPage"
 import SeatPlan from "containers/home-module/SeatPlan/SeatPlan"
+
 import Register from "containers/auth/register/Register"
 import EditProfile from "containers/auth/profileUser/EditProfile/EditProfile"
 
@@ -40,6 +41,8 @@ export const clientRoutes = [
         component: SeatPlan,
         exact: false,
     },  
+   
+
     
     
 ]
