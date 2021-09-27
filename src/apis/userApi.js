@@ -33,9 +33,6 @@ const userApi = {
     registerApi(user){
         return callApi('QuanLyNguoiDung/DangKy', 'POST', user)
     },
-    getUserListApi(currentPage){
-        return callApi(`QuanLyNguoiDung/LayDanhSachNguoiDungPhanTrang?MaNhom=${GROUP_ID}&soTrang=${currentPage}&soPhanTuTrenTrang=${NUMBER_EACH_PAGE}`, 'GET', null);
-    },
     fetchUserProfileApi(taiKhoan){
         return callApi('QuanLyNguoiDung/ThongTinTaiKhoan','POST', taiKhoan)
     },

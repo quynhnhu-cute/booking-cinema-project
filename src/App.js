@@ -1,35 +1,31 @@
-
-import 'antd/dist/antd.css';
-import Header from 'components/Header/Header';
-import Footer from 'components/Footer/Footer'
-import PageNotFound from 'containers/shares/PageNotFound';
+import "antd/dist/antd.css";
+import Header from "components/Header/Header";
+import Footer from "components/Footer/Footer";
+import PageNotFound from "containers/shares/PageNotFound";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { adminRoutes, clientRoutes } from 'routes';
-import './App.css';
-
+import { adminRoutes, clientRoutes } from "routes";
+import "./App.css";
 
 function App() {
-  const renderRoutes = routes =>{
-    return routes.map(route =>{
-      const {path, component, exact} = route;
-      return (
-        <Route path={path} exact={exact} component={component}/>
-      )
-    })
-  }
+  const renderRoutes = (routes) => {
+    return routes.map((route) => {
+      const { path, component, exact } = route;
+      return <Route path={path} exact={exact} component={component} />;
+    });
+  };
   return (
     <div className="App">
       {/* <TopBar className="top-bar"/>
       <SideBar className="side-bar"/> */}
-      
+
       <Router>
-        {/* <Header /> */}
+        <Header />
         <Switch>
-            {renderRoutes(clientRoutes)}
-            {renderRoutes(adminRoutes)}
-            <Route path="*" component={PageNotFound}/>
+          {renderRoutes(clientRoutes)}
+          {renderRoutes(adminRoutes)}
+          <Route path="*" component={PageNotFound} />
         </Switch>
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </div>
   );
