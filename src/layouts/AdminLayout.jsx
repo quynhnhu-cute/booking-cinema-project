@@ -6,7 +6,7 @@ import React, { Component } from 'react'
     render() {
         return (
             <>
-                <AdminPage />
+                {this.props.children}
             </>
         )
     }
