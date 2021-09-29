@@ -5,12 +5,34 @@ import PageNotFound from "containers/shares/PageNotFound";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { adminRoutes, clientRoutes } from "routes";
 import "./App.css";
+import ClientLayout from "layouts/ClientLayout";
+import AdminLayout from "layouts/AdminLayout";
 
 function App() {
   const renderRoutes = (routes) => {
     return routes.map((route) => {
       const { path, component, exact } = route;
-      return <Route path={path} exact={exact} component={component} />;
+      return (
+        <Route
+          path={path}
+          exact={exact}
+          component={component}
+      
+        />
+      );
+    });
+  };
+  const renderClientLayout = (routes, Layout) => {
+    return routes.map((route) => {
+      const { path, component, exact, isPrivate } = route;
+      return (
+        <Layout
+          path={path}
+          exact={exact}
+          component={component}
+          isPrivate={isPrivate}
+        />
+      );
     });
   };
   return (
@@ -19,13 +41,11 @@ function App() {
       <SideBar className="side-bar"/> */}
 
       <Router>
-        <Header />
         <Switch>
-          {renderRoutes(clientRoutes)}
+          {renderClientLayout(clientRoutes, ClientLayout)}
           {renderRoutes(adminRoutes)}
           <Route path="*" component={PageNotFound} />
         </Switch>
-        <Footer />
       </Router>
     </div>
   );

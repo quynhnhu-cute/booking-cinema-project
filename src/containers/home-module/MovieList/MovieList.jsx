@@ -15,7 +15,6 @@ class MovieList extends Component {
  
 
   renderMovieList(movieList) {
-    console.log(this.props);
     return movieList.map((movie) => {
       return (
         <div className="col-3 my-3" key={movie.maPhim}>

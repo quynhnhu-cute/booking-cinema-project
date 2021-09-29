@@ -218,7 +218,7 @@ class SeatPlan extends Component {
   }
 }
 
-class CheckOutHistory extends Component {
+ export class CheckOutHistory extends Component {
   render() {
     console.log(this.props.userProfile);
     if(this.props.userProfile.length === 0) return (
@@ -283,15 +283,24 @@ class CheckOutHistory extends Component {
 const { TabPane } = Tabs;
 
 function callback(key) {
-  console.log(key);
+
 }
 
 class Tab extends Component {
   render() {
     return (
       <div style={{ marginTop: "80px" }}>
-        <Tabs defaultActiveKey="1" onChange={callback}>
-          <TabPane tab="   CHỌN GHẾ THANH TOÁN" key="1">
+        <Tabs defaultActiveKey="1" onChange={() => {
+            userApi
+            .fetchUserProfileApi({ taiKhoan: this.props.currentUser.taiKhoan })
+            .then((res) => {
+              this.props.fetchUserProfile(res.data);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }}>
+          <TabPane tab="CHỌN GHẾ THANH TOÁN" key="1">
             <SeatPlan {...this.props} />
           </TabPane>
           <TabPane tab="KẾT QUẢ ĐẶT VÉ" key="2">
