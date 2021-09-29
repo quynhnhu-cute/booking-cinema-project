@@ -13,18 +13,21 @@ export const movieApi = {
   fetchAllCinemaComplexApi: () => {
     return callApi(
       `QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${GROUP_ID}`
-    )
+    );
   },
   fetchAllMovieApi: () => {
-    return callApi(`QuanLyPhim/LayDanhSachPhim?maNhom=${GROUP_ID}`)
+    return callApi(`QuanLyPhim/LayDanhSachPhim?maNhom=${GROUP_ID}`);
   },
   fetchShowTimeByMovieApi: (movieId) => {
-    return callApi(`QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${movieId}`)
+    return callApi(`QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${movieId}`);
   },
   fetchMovieDetailApi: (movieId) => {
-    return callApi(`QuanLyPhim/LayThongTinPhim?MaPhim=${movieId}`)
+    return callApi(`QuanLyPhim/LayThongTinPhim?MaPhim=${movieId}`);
   },
   fetchSeatPlanApi: (showTimeId) => {
-    return callApi(`QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${showTimeId}`)
-  }
+    return callApi(`QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${showTimeId}`);
+  },
+  buyTicketApi: (seatPlanInfo, userToken) => {
+    return callApi(`QuanLyDatVe/DatVe`, "POST", seatPlanInfo, userToken);
+  },
 };
