@@ -9,15 +9,15 @@ import ClientLayout from "layouts/ClientLayout";
 import AdminLayout from "layouts/AdminLayout";
 
 function App() {
-  const renderRoutes = (routes) => {
+  const renderRoutes = (routes, Layout) => {
     return routes.map((route) => {
-      const { path, component, exact } = route;
+      const { path, component, exact, isPrivate } = route;
       return (
-        <Route
+        <Layout
           path={path}
           exact={exact}
           component={component}
-      
+          isPrivate={isPrivate}
         />
       );
     });
@@ -43,7 +43,7 @@ function App() {
       <Router>
         <Switch>
           {renderClientLayout(clientRoutes, ClientLayout)}
-          {renderRoutes(adminRoutes)}
+          {renderRoutes(adminRoutes, AdminLayout)}
           <Route path="*" component={PageNotFound} />
         </Switch>
       </Router>
