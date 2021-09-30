@@ -13,6 +13,7 @@
     color: black;
     opacity: 0.5;
     width: 100%;
+    text-align: center;
 }
 .cinecomplex__board .nav-pills .nav-link:hover {
     opacity: 1;

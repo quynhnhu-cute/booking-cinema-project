@@ -13,16 +13,16 @@ import { callApi } from "utils/callApi";
   fetchAllCinemaComplexApi: () => {
     return callApi(
       `QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${GROUP_ID}`
-    )
+    );
   },
   fetchAllMovieApi: () => {
-    return callApi(`QuanLyPhim/LayDanhSachPhim?maNhom=${GROUP_ID}`)
+    return callApi(`QuanLyPhim/LayDanhSachPhim?maNhom=${GROUP_ID}`);
   },
   fetchShowTimeByMovieApi: (movieId) => {
-    return callApi(`QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${movieId}`)
+    return callApi(`QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${movieId}`);
   },
   fetchMovieDetailApi: (movieId) => {
-    return callApi(`QuanLyPhim/LayThongTinPhim?MaPhim=${movieId}`)
+    return callApi(`QuanLyPhim/LayThongTinPhim?MaPhim=${movieId}`);
   },
   fetchSeatPlanApi: (showTimeId) => {
     return callApi(`QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${showTimeId}`)
@@ -36,5 +36,9 @@ import { callApi } from "utils/callApi";
   deleteMovieInfo: (maPhim, token) =>{
     return callApi(`QuanLyPhim/XoaPhim?MaPhim=${maPhim}`,'DELETE',null, token);
   }
+    ,
+  buyTicketApi: (seatPlanInfo, userToken) => {
+    return callApi(`QuanLyDatVe/DatVe`, "POST", seatPlanInfo, userToken);
+  },
 };
 export default movieApi;

@@ -14,8 +14,9 @@ const editProfileSchema = yup.object().shape({
   hoTen: yup
     .string()
     .required("(*) Họ tên không được để trống")
+    .matches( /^[^0-9]+$/g, "(*) Họ tên không được có số")
     .matches(
-      /[^a-z0-9A-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]/u,
+      /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/,
       "(*) Họ tên khôn đúng định dạng"
     ),
   email: yup
@@ -25,7 +26,7 @@ const editProfileSchema = yup.object().shape({
   soDt: yup
     .string()
     .required("(*) Số điện thoại không được để trống")
-    .matches(/(84|0[3|5|7|8|9])+([0-9]{8})\b/g, "(*) Số điện thoại không đúng"),
+    .matches(/(84|0[3|5|7|8|9])+([0-9]{8,9})\b/g, "(*) Số điện thoại không đúng định dạng, hoặc không thuộc Việt Nam"),
 });
 class EditProfile extends Component {
   render() {
@@ -41,6 +42,9 @@ class EditProfile extends Component {
           this.props.editProfile(currentUserUpdate);
           if (res.status === 200) {
             document.getElementById("btnModal").click();
+            setTimeout(() => {
+              document.getElementById("closeModal").click();
+            },1000)
           }
         });
     };
@@ -167,7 +171,7 @@ class EditProfile extends Component {
           <div className="modal__container d-flex justify-content-center align-items-center w-100 h-100">
             <div className="modal-dialog" role="document">
               <div className="modal-content">
-                <div className="modal-header">
+                <div className="modal-header d-none">
                   <h5 className="modal-title">Thông báo</h5>
                   <button
                     type="button"
@@ -180,7 +184,7 @@ class EditProfile extends Component {
                     </span>
                   </button>
                 </div>
-                <div className="modal-body d-flex justify-content-center flex-column">
+                <div className="modal-body d-flex justify-content-center flex-column" style={{height:'300px', width: '500px'}}>
                   <CheckCircleOutlined className="icon__modal" />
                   <h3 className="py-3 font-weight-bold text-center">
                     Thay đổi thông tin thành công

@@ -2,5 +2,9 @@
 export const FETCH_SEAT_PLAN_REQUEST = 'FETCH_SEAT_PLAN_REQUEST'
 export const FETCH_SEAT_PLAN_SUCCESS = 'FETCH_SEAT_PLAN_SUCCESS'
 export const FETCH_SEAT_PLAN_FAIL = 'FETCH_SEAT_PLAN_FAIL'
-//Chức năng đặt ghế
+//Chức năng chọn ghế
 export const CHOOSE_SEAT = 'CHOOSE_SEAT'
+//Chức năng mua vé
+export const BUY_TICKET_REQUEST = 'BUY_TICKET_REQUEST'
+export const BUY_TICKET_SUCCESS = 'BUY_TICKET_SUCCESS'
+export const BUY_TICKET_FAIL = 'BUY_TICKET_FAIL'

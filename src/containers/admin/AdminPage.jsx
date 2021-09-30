@@ -1,14 +1,22 @@
-import SideBar from 'components/SideBar/SideBar'
-import TopBar from 'components/TopBar/TopBar'
-import React, { Component } from 'react'
+import SideBar from "components/SideBar/SideBar";
+import TopBar from "components/TopBar/TopBar";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import {Redirect} from 'react-router-dom'
+import withLayout from "hocs/withLayout";
 
-export default class AdminPage extends Component {
-    render() {
-        return (
-           <>
-           <TopBar className="top-bar"/>
-           <SideBar className="side-bar"/>
-           </>
-        )
-    }
+class AdminPage extends Component {
+  render() {
+    return this.props.currentUser.maLoaiNguoiDung === "QuanTri" ? (
+      <>
+        <TopBar className="top-bar" />
+        <SideBar className="side-bar" />
+      </>
+    ) : <Redirect to='/'/>
+  }
 }
+const mapStateToProps = (state) => ({
+  currentUser: state.authReducer.currentUser,
+});
+
+export default connect(mapStateToProps)(AdminPage);
