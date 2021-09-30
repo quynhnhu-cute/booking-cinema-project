@@ -1,4 +1,7 @@
+
+
 footer{
+    overflow: hidden;
     background-color: #222;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -29,6 +32,7 @@ a:hover {
 .info__footer {
     color: #fff;
     font-size: 70%;
+    text-align: left;
 }
 footer .info__footer{
     color: #fff;
@@ -45,4 +49,54 @@ footer .hr__footer {
     border-top: 1px solid #4a4a4a;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+footer .img__zion{
+    border-radius: 8px;
+    width: 80px;
+}
+
+/* Reponsive here */
+@media  screen and (max-width: 1200px) {
+    footer .img__zion{
+        width: 70px;
+    }
+}
+@media screen and (max-width: 768px){
+    .hideOnMobile {
+        display: none!important;
+    }
+    .text__noWrapMobile{
+        white-space: nowrap;
+        padding: 5px;
+    }
+    footer .footer__rowMobile{
+        justify-content: space-around;
+    }
+    footer .container{
+        max-width: 95%;
+    }
+    footer .hr__footer{
+        max-width: 100%;
+    }
+    .info__footer{
+        text-align: center;
+    }
+    footer .imgFooter{
+        text-align: center;
+        padding: 5px;
+    }
+}
+@media screen and (min-width: 414px ) and (max-width: 767.8px) {
+    footer .flexOnMobile{
+        flex-direction: row!important;
+        justify-content: center;
+    }
+    .text__noWrapMobile{
+        white-space: pre-wrap;
+        padding:5px;
+    }
+    footer .imgFooter{
+        text-align: center;
+        padding: 5px;
+    }
 }

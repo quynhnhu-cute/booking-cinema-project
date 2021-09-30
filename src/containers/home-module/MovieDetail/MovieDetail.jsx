@@ -37,10 +37,8 @@ class MovieDetail extends Component {
                       this.props.movieDetail.ngayKhoiChieu
                     ).toLocaleDateString()}
                   </span>
-                  <h2>{this.props.movieDetail.tenPhim}</h2>
-                  <span>
-                    {this.props.movieDetail.lichChieu[0].thoiLuong} phút
-                  </span>
+                  <h2 className="text-white">{this.props.movieDetail.tenPhim}</h2>
+               
                 </div>
               </div>
             </div>
