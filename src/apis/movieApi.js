@@ -2,7 +2,7 @@ import { GROUP_ID } from "settings/apiConfig";
 import { callApi } from "utils/callApi";
 
 // movie api here
-export const movieApi = {
+ const movieApi = {
   fetchMovieByPageApi: (currentPage, countInPage) => {
     //currentPage: Số trang cần callApi
     //countInPage: Số phần tử (phim) trong 1 trang
@@ -26,5 +26,15 @@ export const movieApi = {
   },
   fetchSeatPlanApi: (showTimeId) => {
     return callApi(`QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${showTimeId}`)
+  },
+  addMovieApi: (formData) =>{
+    return callApi(`QuanLyPhim/ThemPhimUploadHinh`,'POST',formData);
+  },
+  updateMovieInfo: (formData, token) =>{
+    return callApi(`QuanLyPhim/CapNhatPhimUpload`, 'POST', formData, token);
+  },
+  deleteMovieInfo: (maPhim, token) =>{
+    return callApi(`QuanLyPhim/XoaPhim?MaPhim=${maPhim}`,'DELETE',null, token);
   }
 };
+export default movieApi;

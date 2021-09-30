@@ -1,12 +1,11 @@
 import { Form, Input, Modal, Switch } from "antd";
 import userApi from "apis/userApi";
-import authReducer from "containers/auth/module/reducer";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { GROUP_ID } from "settings/apiConfig";
-import { LoaiNguoiDung, SUCCESS_STATUS_CODE, FAILED_STATUS_CODE } from "settings/appConfig";
-import "./UserModal.css";
+import { FAILED_STATUS_CODE, LoaiNguoiDung, SUCCESS_STATUS_CODE } from "settings/appConfig";
 import { openNotification } from "utils/notification";
+import "./UserModal.css";
 
 class UserModal extends Component {
   state = {

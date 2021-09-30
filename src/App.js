@@ -29,7 +29,7 @@ function App() {
             {renderRoutes(adminRoutes)}
             <Route path="*" component={PageNotFound}/>
         </Switch>
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </div>
   );

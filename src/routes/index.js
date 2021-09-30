@@ -9,6 +9,7 @@ import SeatPlan from "containers/home-module/SeatPlan/SeatPlan"
 
 import Register from "containers/auth/register/Register"
 import EditProfile from "containers/auth/profileUser/EditProfile/EditProfile"
+import MovieDetailPage from "containers/admin/movie-management/movie-detail-page/MovieDetailPage"
 
 export const clientRoutes = [
     {
@@ -68,4 +69,9 @@ export const adminRoutes = [
         component: ShowMovieManagement,
         exact: true,
     },
+    {
+        path: '/admin/movie-management/:movieId',
+        component: MovieDetailPage,
+        exact: false
+    }
 ]

@@ -1,4 +1,4 @@
-import { movieApi } from "apis/movieApi";
+import  movieApi  from "apis/movieApi";
 import {
   CHOOSE_SEAT,
   FETCH_SEAT_PLAN_FAIL,

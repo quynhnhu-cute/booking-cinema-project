@@ -1,0 +1,18 @@
+.text-warning{
+    font-family: headerFont;
+}
+
+@font-face {
+    font-family: headerFont;
+    src: url(./Pony.ttf);
+}
+
+
+
+.image-movie{
+    height: 200px;
+    
+    
+    
+   
+}
