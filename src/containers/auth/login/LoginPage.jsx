@@ -20,85 +20,84 @@ class LoginPage extends Component {
     } else {
       if (this.props.loading) return <Loader></Loader>;
       return (
-        <div>
-          <img
-            src="./background-film.jpg"
-            alt="login-background"
-            className="login-bg"
-          />
-          <Form
-            labelCol={{
-              span: 5,
-            }}
-            wrapperCol={{
-              span: 16,
-            }}
-            name="normal_login"
-            className="login-form formation "
-            onFinish={this.onFinish}
-          >
-            <h1 className="d-flex justify-content-center color-white pb-4">
-              Đăng nhập
-            </h1>
-            {this.props.error && (
-              <div className="alert alert-danger">{this.props.error}</div>
-            )}
-            <Form.Item
-              className="pb-4 login-label"
-              label="Tên đăng nhập"
-              name="taiKhoan"
-              rules={[
-                {
-                  required: true,
-                  message: "Tài khoản không được trống!",
-                },
-              ]}
+        <div className="login__container">
+          <div className="form__control">
+            <Form
+              labelCol={{
+                span: 5,
+              }}
+              wrapperCol={{
+                span: 16,
+              }}
+              name="normal_login"
+              className="login-form formation "
+              onFinish={this.onFinish}
             >
-              <Input
-                prefix={<UserOutlined className="site-form-item-icon" />}
-                placeholder="Username"
-              />
-            </Form.Item>
-            <Form.Item
-              className="pb-3 login-label"
-              label="Mật khẩu"
-              name="matKhau"
-              rules={[
-                {
-                  required: true,
-                  message: "Phải có mật khẩu!",
-                },
-              ]}
-            >
-              <Input
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                type="password"
-                placeholder="Password"
-              />
-            </Form.Item>
-
-            <Form.Item className="d-flex justify-content-end">
-              <Button
-                type="primary "
-                htmlType="submit"
-                className="login-form-button"
-              >
+              <h1 className="d-flex justify-content-center color-white pb-4">
                 Đăng nhập
-              </Button>
-            </Form.Item>
-            <Form.Item className="d-flex justify-content-end ml-5">
-              <div className="pt-2 pb-4 span-deco ml-5">Hoặc</div>
-            </Form.Item>
-            <Form.Item className="d-flex justify-content-end">
-              <Button
-                type="default"
-                htmlType="submit"
-                className="login-form-button register-button"
+              </h1>
+              {this.props.error && (
+                <div className="alert alert-danger">{this.props.error}</div>
+              )}
+              <Form.Item
+                className="pb-4 login-label"
+                label="Tên đăng nhập"
+                name="taiKhoan"
+                rules={[
+                  {
+                    required: true,
+                    message: "Tài khoản không được trống!",
+                  },
+                ]}
               >
-                Đăng kí
-              </Button>
-            </Form.Item>
-          </Form>
+                <Input
+                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  placeholder="Username"
+                />
+              </Form.Item>
+              <Form.Item
+                className="pb-3 login-label"
+                label="Mật khẩu"
+                name="matKhau"
+                rules={[
+                  {
+                    required: true,
+                    message: "Phải có mật khẩu!",
+                  },
+                ]}
+              >
+                <Input
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  type="password"
+                  placeholder="Password"
+                />
+              </Form.Item>
+
+              <div className="login__action">
+                <Form.Item>
+                  <Button
+                    type="primary "
+                    htmlType="submit"
+                    className="login-form-button"
+                  >
+                    Đăng nhập
+                  </Button>
+                </Form.Item>
+                <Form.Item>
+                  <div className="span-deco">Hoặc</div>
+                </Form.Item>
+                <Form.Item>
+                  <Button
+                    type="default"
+                    htmlType="submit"
+                    className="login-form-button register-button"
+                  >
+                    Đăng kí
+                  </Button>
+                </Form.Item>
+              </div>
+            </Form>
+          </div>
         </div>
       );
     }

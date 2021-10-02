@@ -9,26 +9,26 @@ export default class Footer extends Component {
         {/* Footer Links */}
         <div className="container footer__container text-center text-md-left">
           {/* Grid row */}
-          <div className="row">
+          <div className="row footer__rowMobile">
             {/* Grid column */}
-            <div className="col-md-4 mt-md-0 mt-3">
+            <div className="col-sm-4 col-xs-12 mt-md-0 mt-3">
               {/* Content */}
-              <p className="text-uppercase">TIX</p>
+              <p className="text-uppercase hideOnMobile">TIX</p>
               <div className="row">
-                <div className="col-6 d-flex flex-column">
+                <div className="col-md-6 d-flex flex-column hideOnMobile">
                   <a href="#">FAQ</a>
                   <a href="#">Brand Guidelines</a>
                 </div>
-                <div className="col-6 d-flex flex-column">
-                  <a href="#">Thỏa thuận sử dụng</a>
-                  <a href="#">Chính sách bảo mật</a>
+                <div className="flexOnMobile col-md-6 col-12 d-flex flex-column">
+                  <a href="#" className="text__noWrapMobile">Thỏa thuận sử dụng</a>
+                  <a href="#" className="text__noWrapMobile">Chính sách bảo mật</a>
                 </div>
               </div>
             </div>
             {/* Grid column */}
             <hr className="clearfix w-100 d-md-none pb-3" />
             {/* Grid column */}
-            <div className="col-md-4 mb-md-0 mb-3">
+            <div className="col-md-4 mb-md-0 mb-3 hideOnMobile">
               {/* Links */}
               <p className="text-uppercase">Đối tác</p>
               <div className="row d-flex flex-row wrap">
@@ -55,8 +55,8 @@ export default class Footer extends Component {
             {/* Grid column */}
             <div className="col-md-4 mb-md-0 mb-3">
               {/* Links */}
-              <div className="row">
-                <div className="col-6">
+              <div className="row flexOnMobile">
+                <div className="col-6 hideOnMobile">
                   <p>MOBILE APP</p>
                   <div className="row d-flex flex-row wrap">
                     {dataPartner.mobileApp.map((partner,index) => {
@@ -75,8 +75,8 @@ export default class Footer extends Component {
                   </div>
                 </div>
                 <div className="col-6">
-                  <p>SOCIALS</p>
-                  <div className="row d-flex flex-row wrap">
+                  <p className="hideOnMobile">SOCIALS</p>
+                  <div className="row d-flex flex-row wrap flexOnMobile">
                     {dataPartner.social.map((partner,index) => {
                       return (
                         <div className="col-2 mb-2 mr-2" key={index}>
@@ -103,14 +103,13 @@ export default class Footer extends Component {
         <hr className="hr__footer container" />
         <div className="container">
           <div className="row">
-            <div className="col-sm-1 col-xs-12 imgFooter">
+            <div className="col-sm-2 col-xs-12 imgFooter">
               <img
-                className="img-fluid"
+                className="img__zion"
                 src="https://tix.vn/app/assets/img/icons/zion-logo.jpg"
-                style={{ borderRadius: 8, width: "100px" }}
               />
             </div>
-            <div className="col-sm-9 col-xs-12 info__footer text-left">
+            <div className="col-sm-8 col-xs-12 info__footer">
               <span>TIX – SẢN PHẨM CỦA CÔNG TY CỔ PHẦN ZION</span>
               <br />
               <span>

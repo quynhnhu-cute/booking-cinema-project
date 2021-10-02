@@ -15,7 +15,7 @@ export default class Banner extends Component {
       autoplaySpeed: 3000,
     };
     return (
-      <div className="carousel">
+      <div className="carousel carousel__container">
         <Slider {...settings}>
           <div className="carousel-item active">
             <img

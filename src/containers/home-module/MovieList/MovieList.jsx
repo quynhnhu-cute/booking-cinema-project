@@ -17,7 +17,7 @@ class MovieList extends Component {
   renderMovieList(movieList) {
     return movieList.map((movie) => {
       return (
-        <div className="col-3 my-3" key={movie.maPhim}>
+        <div className="col-md-3 col-6 my-3" key={movie.maPhim}>
           <div className="card movielist__card">
             <div className="movielist__img">
               <img className="card-img-top img-fluid" src={movie.hinhAnh}  />

@@ -38,8 +38,8 @@ class SeatPlan extends Component {
     return (
       <div className="seatplan">
         <div className="seatplan__container container-fluid py-5">
-          <div className="row ">
-            <div className="col-7 seatplan__boxLeft">
+          <div className="row">
+            <div className="col-xs-12 col-xl-7 seatplan__boxLeft">
               <div className="seatplan__screen">
                 <p className="seatplan__text">Màn hình</p>
               </div>
@@ -125,7 +125,7 @@ class SeatPlan extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-5 seatplan__info my-5">
+            <div className="col-xs-12 col-xl-5 seatplan__info my-5">
               <div className="seatplan__table">
                 <div className="row seatplan__tbrow">
                   <div
@@ -235,7 +235,7 @@ class SeatPlan extends Component {
         <div className="row">
           {this.props.userProfile.thongTinDatVe.map(ticketInfo => {
             return (  
-          <div className="col-3">
+          <div className="col-6 col-md-3">
           <div className="card mb-3" style={{ maxWidth: 540 }}>
             <div className="row no-gutters">
               <div className="col-md-12">

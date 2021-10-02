@@ -11,7 +11,7 @@ class CinemaComplex extends Component {
     return (
       <div className="container cinecomplex_container" id="cinemacomplex">
         <div className="row cinecomplex__board">
-          <div className="col-2">
+          <div className="col-4 col-md-2">
             <div
               className="nav flex-column nav-pills"
               id="v-pills-tab"
@@ -36,7 +36,7 @@ class CinemaComplex extends Component {
               })}
             </div>
           </div>
-          <div className="col-3">
+          <div className="col-8 col-md-3">
             <div className="tab-content" id="v-pills-tabContent">
               {this.props.cinemaComplex.map((cnmComplex) => {
                 return (
@@ -81,7 +81,7 @@ class CinemaComplex extends Component {
               })}
             </div>
           </div>
-          <div className="col-7">
+          <div className="col col-md-7">
             <div className="tab-content" id="v-pills-tabContent-2">
               {this.props.cinemaComplex.map((cnmComplex) => {
                 return cnmComplex.lstCumRap.map((complexBrand) => {
