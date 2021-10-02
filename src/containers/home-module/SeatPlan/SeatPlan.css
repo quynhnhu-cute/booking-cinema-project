@@ -120,3 +120,18 @@
     font-weight: 600;
     padding: 10px 0;
 }
+@media  screen and (max-width: 768px) {
+    .checkoutHis.container{
+        max-width: 100%;
+    }
+    .seatplan__table{
+        width: 100%;
+    }
+}
+@media  screen and (max-width: 590px) {
+    .seatplan__seat {
+        width: 20px;
+        height: 20px;
+        margin: 3px 2px;
+    }
+}
