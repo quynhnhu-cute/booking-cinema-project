@@ -1,42 +1,61 @@
-*{
-    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+* {
+    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
 }
-.login-bg{ 
+.login-bg {
     width: 100%;
 }
 
-.margin-bottom{
+.margin-bottom {
     margin-bottom: 10px;
 }
-
-.formation{
-    position: absolute;
-    width: 35%;
-   top: 20%;
-  color: white;
-   right: 35%;
-   height: 70vh;
-   padding-top: 30px;
-
-   /* text-align: center; */
+.form__control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 70px 0;
+}
+.login__container {
+    background-image: url(./background-film.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 750px;
 }
 
-.color-white{
+.form__control .login__action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.formation {
+    width: 50%;
+    color: white;
+    height: 70vh;
+
+    /* text-align: center; */
+}
+
+.color-white {
     color: white;
 }
-.login-label .ant-form-item-label label{
+.login-label .ant-form-item-label label {
     color: white;
 }
 
-.color-wheat{
+.color-wheat {
     color: wheat;
 }
 
-.login-form-button{
-    width: 60%;
+.login-form-button {
+    width: 100%;
+    margin: 0 20px;
 }
 
-.span-deco{
+.span-deco {
     color: white;
     background-color: rgb(243, 44, 44);
     width: 50px;
@@ -47,7 +66,7 @@
     display: flex;
 }
 
-.register-button{
+.register-button {
     background-color: rgb(243, 44, 44);
     color: white;
 }

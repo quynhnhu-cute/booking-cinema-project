@@ -61,3 +61,11 @@
 .searchtool__item:first-child{
     width: 40%;
 }
+
+/* Reponsive here  */
+
+@media screen and (max-width:768px) {
+    .searchtool__box {
+        width: 97%;
+    }
+}

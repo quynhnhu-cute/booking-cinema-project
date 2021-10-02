@@ -73,3 +73,13 @@
     font-size: 50px;
     background-color: transparent;
 }
+
+/* Reponsive here */
+
+/* Ipad screen (>768px) */
+
+@media screen and (max-width:768px) {
+    .container.movielist{
+        max-width: 100%;
+    }
+}
