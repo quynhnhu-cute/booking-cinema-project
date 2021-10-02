@@ -69,6 +69,7 @@ class MovieDetailPage extends Component {
       for (let key in this.state.movieInfo) {
         formData.append(key, this.state.movieInfo[key]);
       }
+      console.log("danh gia formData: ", formData.get("danhGia"));
       movieApi
         .addMovieApi(formData)
         .then((result) => {
@@ -99,6 +100,7 @@ class MovieDetailPage extends Component {
       for (let key in this.state.movieInfo) {
         formData.append(key, this.state.movieInfo[key]);
       }
+      console.log("danh gia formData: ", formData.get("danhGia"));
       movieApi
         .updateMovieInfo(formData, this.props.token)
         .then((result) => {

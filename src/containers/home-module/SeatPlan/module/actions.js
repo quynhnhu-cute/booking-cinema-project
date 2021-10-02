@@ -1,5 +1,5 @@
 import  movieApi  from "apis/movieApi";
-import { movieApi } from "apis/movieApi";
+// import { movieApi } from "apis/movieApi";
 import { openNotification } from "utils/notification";
 import {
   BUY_TICKET_FAIL,
