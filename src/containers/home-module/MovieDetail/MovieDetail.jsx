@@ -14,7 +14,7 @@ class MovieDetail extends Component {
       <div className="moviedetail">
         <div className="container moviedetail__container">
           <div className="row moviedetail__top">
-            <div className="col-7 ">
+            <div className="col col-md-7">
               <div className="moviedetail__left moviedetail__box">
                 <div className="moviedetail__img">
                   <img src={this.props.movieDetail.hinhAnh} width="250px"  />
@@ -64,9 +64,9 @@ class MovieDetail extends Component {
               </div>
             </div>
           </div>
-          <div className="moviedetail__bot my-5">
-            <div className="row">
-              <div className="col-6">
+          <div className="moviedetail__bot my-5 mx-2">
+            <div className="row moviedetail__info">
+              <div className="col col-md-6">
                 <div className="moviedetail__row">
                   <p className="moviedetail__title">Ngày công chiếu</p>
                   <p className="moviedetail__content">
@@ -96,7 +96,7 @@ class MovieDetail extends Component {
                   <p className="moviedetail__content">{""}</p>
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col col-md-6">
                 <div className="row">
                   <div className="col">
                     <p className="moviedetail__title">Nội dung</p>
