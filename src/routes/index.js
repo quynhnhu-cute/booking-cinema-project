@@ -55,12 +55,7 @@ export const clientRoutes = [
 ]
 
 export const adminRoutes = [
-    {
-        path: '/admin',
-        component: AdminPage,
-        exact: true,
-        isPrivate: true,
-    },
+   
     {
         path: '/admin/user-management',
         component: UserManagement,

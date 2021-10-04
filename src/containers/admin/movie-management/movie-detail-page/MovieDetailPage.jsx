@@ -9,10 +9,9 @@ import {
 } from "antd";
 import movieApi from "apis/movieApi";
 import SideBar from "components/SideBar/SideBar";
-// import Button from "components/StandardButton/Button";
+
 import TopBar from "components/TopBar/TopBar";
 import moment from "moment";
-// import "moment/locale/zh-cn";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { GROUP_ID } from "settings/apiConfig";
@@ -36,17 +35,85 @@ const formItemLayout = {
 
 class MovieDetailPage extends Component {
   state = {
-    movieInfo: null,
+    movieInfo: {},
     isLoading: false,
     isNew: false,
+    error: null
   };
   dateFormat = "DD/MM/YYYY";
 
-  onFinish = () => {
-    const index = this.state.movieInfo.trailer.indexOf("=");
-    console.log(index);
-    console.log(this.state.movieInfo.trailer);
-    console.log(this.state.movieInfo.trailer.slice(index + 1, index + 12));
+  validateForm = async () =>{
+    let result = true;
+    this.setState({error: {
+      tenPhimError: "",
+      biDanhError: "",
+      trailerError: "",
+      moTaError: "",
+      danhGiaError: "",
+      hinhAnhError: ""
+    }});
+    const {tenPhim, biDanh, trailer, moTa, danhGia, hinhAnh} = this.state.movieInfo;
+    if (!tenPhim || (tenPhim.length < 3 || tenPhim.length > 10)) {
+      // set state is asynchronous function so need to use await for set state .
+      await this.setState({
+        error: {
+          ...this.state.error,
+          tenPhimError: "Tên phim phải từ 3 đến 10 kí tự",
+        },
+      });
+      result =false;
+    }
+    if (!biDanh || (biDanh.length < 3 || biDanh.length > 10)) {
+      await this.setState({
+        error: {
+          ...this.state.error,
+          biDanhError: "Bí danh phải từ 3 đến 10 kí tự",
+        },
+      });
+      result =false;
+    }
+    if (!trailer || (trailer.length < 3 || trailer.length > 10)) {
+      await this.setState({
+        error: {
+          ...this.state.error,
+          trailerError: "Trailer phải từ 3 đến 10 kí tự",
+        },
+      });
+      result =false;
+    }
+    if (!moTa || (moTa.length < 3 || moTa.length > 1000)) {
+      await this.setState({
+        error: {
+          ...this.state.error,
+          moTaError: "Mô tả phải từ 3 kí tự trở lên",
+        },
+      });
+      result =false;
+    }
+    if (!danhGia) {
+      await this.setState({
+        error: {
+          ...this.state.error,
+          danhGiaError: "Phim cần có đánh giá",
+        },
+      });
+      result =false;
+    }
+    if (!hinhAnh) {
+      await this.setState({
+        error: {
+          ...this.state.error,
+          hinhAnhError: "Hình ảnh ko hợp lệ",
+        },
+      });
+      result =false;
+    }
+    return result;
+  }
+
+  onFinish = async () => {
+    if(await this.validateForm()){
+      const index = this.state.movieInfo.trailer.indexOf("=");
     index != -1 &&
       this.setState({
         movieInfo: {
@@ -69,7 +136,6 @@ class MovieDetailPage extends Component {
       for (let key in this.state.movieInfo) {
         formData.append(key, this.state.movieInfo[key]);
       }
-      console.log("danh gia formData: ", formData.get("danhGia"));
       movieApi
         .addMovieApi(formData)
         .then((result) => {
@@ -87,6 +153,7 @@ class MovieDetailPage extends Component {
           console.log(error);
         });
     } else {
+      // backend only receive value DD/MM/YYYY so parse value to DD/MM/YYYY for backend
       this.setState({
         movieInfo: {
           ...this.state.movieInfo,
@@ -95,12 +162,10 @@ class MovieDetailPage extends Component {
           ),
         },
       });
-      console.log(this.state.movieInfo);
       let formData = new FormData();
       for (let key in this.state.movieInfo) {
         formData.append(key, this.state.movieInfo[key]);
       }
-      console.log("danh gia formData: ", formData.get("danhGia"));
       movieApi
         .updateMovieInfo(formData, this.props.token)
         .then((result) => {
@@ -119,10 +184,12 @@ class MovieDetailPage extends Component {
           console.log(error);
         });
     }
+    }
   };
 
+  //get file when upload
   normFile = (e) => {
-    console.log("Upload event:", e);
+    // if hanving photto upload, get the first one for hinhAnh field
     e.fileList[0] &&
       this.setState({
         movieInfo: {
@@ -130,9 +197,10 @@ class MovieDetailPage extends Component {
           hinhAnh: e.fileList[0].originFileObj,
         },
       });
-    console.log(this.state.movieInfo);
   };
 
+
+  //check file upload is image or not, the storage must be smaller than 2mb
   checkImageUpload(file) {
     const isJpgOrPng =
       file.type === "image/jpeg" ||
@@ -149,9 +217,9 @@ class MovieDetailPage extends Component {
     }
     return isJpgOrPng && isLt2M ? true : Upload.LIST_IGNORE;
   }
-
+// Can not select days before today and today
   disabledDate = (current) => current && current <= moment().endOf("day");
-  // Can not select days before today and today
+  
 
   componentDidMount() {
     const { movieId } = this.props.match.params;
@@ -178,8 +246,6 @@ class MovieDetailPage extends Component {
               maPhim: data.maPhim,
             },
           });
-          console.log(this.state.movieInfo);
-          console.log(this.state.movieInfo.hinhAnh);
         })
         .then((error) => {
           console.log(error);
@@ -199,18 +265,16 @@ class MovieDetailPage extends Component {
   };
   handleTrailer = (e) => {
     const value = e.target.value;
-    // const index = e.target.value.indexOf("=");
-    // const trailer = value.slice(value.indexOf("="), 11);
-    // console.log(trailer);
     this.setState({ movieInfo: { ...this.state.movieInfo, trailer: value } });
   };
   handleNgayKhoiChieu = (date, dateString) => {
     if (date != null) {
+      // parse date string to UTC to show the correct date
       const chosenDate = new moment(date._d).utc().format();
       this.setState({
         movieInfo: { ...this.state.movieInfo, ngayKhoiChieu: chosenDate },
       });
-      console.log(this.state.movieInfo);
+      
     }
   };
   handleMoTa = (e) => {
@@ -261,8 +325,10 @@ class MovieDetailPage extends Component {
                     value={
                       this.state.movieInfo ? this.state.movieInfo.tenPhim : ""
                     }
+
                     onChange={this.handleTenPhim}
                   />
+                  <p className="text-danger">{this.state.error && this.state.error.tenPhimError}</p>
                 </Form.Item>
                 <Form.Item label="Bí danh phim:">
                   <Input
@@ -271,6 +337,7 @@ class MovieDetailPage extends Component {
                     }
                     onChange={this.handleBiDanh}
                   />
+                   <p className="text-danger">{this.state.error && this.state.error.biDanhError}</p>
                 </Form.Item>
                 <Form.Item label="Trailer phim:">
                   <Input
@@ -279,6 +346,7 @@ class MovieDetailPage extends Component {
                     }
                     onChange={this.handleTrailer}
                   />
+                   <p className="text-danger">{this.state.error && this.state.error.trailerError}</p>
                 </Form.Item>
 
                 <Form.Item label="Ngày khởi chiếu:">
@@ -303,10 +371,12 @@ class MovieDetailPage extends Component {
                     }
                     onChange={this.handleMoTa}
                   />
+                   <p className="text-danger">{this.state.error && this.state.error.moTaError}</p>
                 </Form.Item>
 
                 <Form.Item label="Rate">
-                  <Rate onChange={this.handleRate} />
+                  <Rate onChange={this.handleRate}  />
+                  <p className="text-danger">{this.state.error && this.state.error.danhGiaError}</p>
                 </Form.Item>
                 {!this.state.isNew && (
                   <Form.Item label="Hình ảnh hiện tại: ">
@@ -338,6 +408,7 @@ class MovieDetailPage extends Component {
                         Bạn chỉ có thể upload 1 hình ảnh
                       </p>
                     </Upload.Dragger>
+                    <p className="text-danger">{this.state.error && this.state.error.hinhAnhError}</p>
                   </Form.Item>
                 </Form.Item>
 

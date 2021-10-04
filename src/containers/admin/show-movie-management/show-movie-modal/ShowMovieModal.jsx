@@ -1,21 +1,18 @@
 import {
-  Col,
+  Cascader, Col,
   DatePicker,
   Form,
-  Input,
-  Modal,
+  Input, InputNumber, Modal,
   Row,
-  Select,
-  TimePicker,
+  Select, Space, TimePicker
 } from "antd";
 import { theaterApi } from "apis/theaterApi";
+import moment from "moment";
 import React, { Component } from "react";
-import { openNotification } from "utils/notification";
-import "./ShowMovieModal.css";
-import { Cascader, InputNumber, Space } from "antd";
 import { connect } from "react-redux";
 import { FAILED_STATUS_CODE, SUCCESS_STATUS_CODE } from "settings/appConfig";
-import { withFormik } from "formik";
+import { openNotification } from "utils/notification";
+import "./ShowMovieModal.css";
 
 class ShowMovieModal extends Component {
   state = {
@@ -26,7 +23,9 @@ class ShowMovieModal extends Component {
     theaterDetailList: null,
     heThongChosen: null,
     theaterDetailChosen: null,
+    error: null,
   };
+  disabledDate = (current) => current && current <= moment().endOf("day");
   ngayChieuPhim = "";
   gioChieu = "00:00:00";
   getHeThongRap = () => {
@@ -40,7 +39,7 @@ class ShowMovieModal extends Component {
           heThongChosen: result.data[0].maHeThongRap,
         });
         this.getTheaterDetailList();
-        console.log(result);
+     
       })
       .catch((error) => {
         this.setState({ isLoading: false });
@@ -49,9 +48,52 @@ class ShowMovieModal extends Component {
       });
   };
 
+  validateForm = async () => {
+
+    const { ngayChieuGioChieu, maRap, giaVe } = this.state.theaterDetailChosen;
+
+
+    let result = true;
+    await this.setState({
+      error: {
+        ngayChieuGioChieuError: "",
+        maRapError: "",
+        giaVeError: "",
+      },
+    });
+    if (!ngayChieuGioChieu || !this.ngayChieuPhim || !this.gioChieu) {
+      await this.setState({
+        error: {
+          ...this.state.error,
+          ngayChieuGioChieuError: "Vui lòng chọn ngày giờ chiếu",
+        },
+      });
+      result = false;
+    }
+    if (!maRap) {
+      await this.setState({
+        error: {
+          ...this.state.error,
+          maRapError: "Vui lòng chọn rạp chiếu",
+        },
+      });
+      result = false;
+    }
+  
+    if (!giaVe || giaVe < 75000 || giaVe > 200000) {
+      await this.setState({
+        error: {
+          ...this.state.error,
+          giaVeError: "Giá vé phải từ 75.000 VNĐ đến 200.000 VNĐ",
+        },
+      });
+      result = false;
+    }
+    return result;
+  };
+
   getTheaterDetailList = async () => {
     this.setState({ isLoading: true });
-    console.log(this.state.heThongChosen);
     theaterApi
       .getTheaterDetail(this.state.heThongChosen)
       .then((result) => {
@@ -69,7 +111,7 @@ class ShowMovieModal extends Component {
           });
         });
         this.setState({ theaterDetailList: options });
-        console.log(result);
+ 
       })
       .catch((error) => {
         openNotification("error", "Lỗi lấy dữ liệu tên rạp");
@@ -85,7 +127,7 @@ class ShowMovieModal extends Component {
   };
 
   handleOk = async () => {
-    // this.setState({ isModalVisible: false });
+
     await this.setState({
       theaterDetailChosen: {
         ...this.state.theaterDetailChosen,
@@ -93,24 +135,26 @@ class ShowMovieModal extends Component {
         ngayChieuGioChieu: this.ngayChieuPhim + " " + this.gioChieu,
       },
     });
-    console.log(this.state.theaterDetailChosen);
-    this.setState({ isLoading: true });
-    theaterApi
-      .addMovieShow(this.state.theaterDetailChosen, this.props.token)
-      .then((result) => {
-        if (result.status == SUCCESS_STATUS_CODE) {
-          openNotification("success", result.data);
-        }
-      })
-      .catch((error) => {
-        if (error.response.status == FAILED_STATUS_CODE) {
-          openNotification("warning", error.response.data);
-        } else {
-          openNotification("error", "Không thể thêm phim!");
-        }
-        console.log(error);
-      });
-    this.sendData();
+
+    if (await this.validateForm()) {
+      this.setState({ isLoading: true });
+      theaterApi
+        .addMovieShow(this.state.theaterDetailChosen, this.props.token)
+        .then((result) => {
+          if (result.status == SUCCESS_STATUS_CODE) {
+            openNotification("success", result.data);
+          }
+        })
+        .catch((error) => {
+          if (error.response.status == FAILED_STATUS_CODE) {
+            openNotification("warning", error.response.data);
+          } else {
+            openNotification("error", "Không thể thêm phim!");
+          }
+          console.log(error);
+        });
+      this.sendData();
+    }
   };
 
   handleCancel = () => {
@@ -132,23 +176,20 @@ class ShowMovieModal extends Component {
         maRap: value[1],
       },
     });
-    console.log(value[1]);
-    console.log(selectedOptions);
   };
 
   layNgayChieu = (date, dateString) => {
     this.ngayChieuPhim = dateString;
 
-    console.log(dateString);
+    
   };
 
   layGioChieu = (time, timeString) => {
     this.gioChieu = timeString;
-    console.log(this.ngayChieuPhim);
-    console.log(timeString);
+    
   };
   layGiaVe = (value) => {
-    console.log(value);
+   
     this.setState({
       theaterDetailChosen: { ...this.state.theaterDetailChosen, giaVe: value },
     });
@@ -189,9 +230,13 @@ class ShowMovieModal extends Component {
                   <DatePicker
                     onChange={this.layNgayChieu}
                     format="DD/MM/YYYY"
+                    disabledDate={this.disabledDate}
                   />
                   <TimePicker onChange={this.layGioChieu} />
                 </Space>
+                <p className="text-danger">
+                  {this.state.error && this.state.error.ngayChieuGioChieuError}
+                </p>
               </Form.Item>
 
               {this.state.theaterSystem && (
@@ -212,24 +257,29 @@ class ShowMovieModal extends Component {
               )}
               <Form.Item label="Chọn rạp">
                 {this.state.theaterDetailList && (
-                  <Cascader
-                    options={this.state.theaterDetailList}
-                    // defaultValue={[this.state.theaterDetailList[0].label, this.state.theaterDetailList[0].children[0].label]}
-                    onChange={this.chonRapChieu}
-                    placeholder="Chọn rạp"
-                  />
+                  <React.Fragment>
+                    <Cascader
+                      options={this.state.theaterDetailList}
+                      // defaultValue={[this.state.theaterDetailList[0].label, this.state.theaterDetailList[0].children[0].label]}
+                      onChange={this.chonRapChieu}
+                      placeholder="Chọn rạp"
+                    />
+                    <p className="text-danger">
+                      {this.state.error && this.state.error.maRapError}
+                    </p>
+                  </React.Fragment>
                 )}
               </Form.Item>
               <Form.Item label="Giá vé">
                 <Space>
                   <InputNumber
-                    min={75000}
-                    max={200000}
+                  
                     style={{ width: "300px" }}
                     onChange={this.layGiaVe}
                   />
                   <Input value={"VNĐ"} disabled style={{ width: "55px" }} />
                 </Space>
+                <p className="text-danger">{this.state.error && this.state.error.giaVeError}</p>
               </Form.Item>
             </Form>
           </Col>

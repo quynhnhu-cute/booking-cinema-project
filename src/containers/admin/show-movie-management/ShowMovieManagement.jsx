@@ -38,8 +38,8 @@ export default class ShowMovieManagement extends Component {
     this.getMovieListPagination();
   }
 
-  onChangePage = (page) => {
-    this.setState({ currentPage: page });
+  onChangePage = async (page) => {
+    await this.setState({ currentPage: page });
     this.getMovieListPagination();
   };
 

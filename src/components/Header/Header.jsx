@@ -4,6 +4,7 @@ import "./Header.css";
 import { connect } from "react-redux";
 import { actLogOut } from "containers/auth/module/action";
 import { AlignRightOutlined } from "@ant-design/icons";
+import { LoaiNguoiDung } from "settings/appConfig";
 class Header extends Component {
   handleLogout = () => {
     this.props.logout();
@@ -181,6 +182,9 @@ class Header extends Component {
                 Ứng dụng
               </a>
             </li>
+           {this.props.currentUser && this.props.currentUser.maLoaiNguoiDung == LoaiNguoiDung.QUAN_TRI && ( <Link className="nav-link" to="/admin/user-management">
+               Quản trị hệ thống
+              </Link>)}
           </ul>
 
           <ul className="navbar-nav ml-auto">
