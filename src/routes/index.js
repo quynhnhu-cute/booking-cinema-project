@@ -9,6 +9,7 @@ import SeatPlan from "containers/home-module/SeatPlan/SeatPlan"
 
 import Register from "containers/auth/register/Register"
 import EditProfile from "containers/auth/profileUser/EditProfile/EditProfile"
+import MovieDetailPage from "containers/admin/movie-management/movie-detail-page/MovieDetailPage"
 
 export const clientRoutes = [
     {
@@ -54,12 +55,7 @@ export const clientRoutes = [
 ]
 
 export const adminRoutes = [
-    {
-        path: '/admin',
-        component: AdminPage,
-        exact: true,
-        isPrivate: true,
-    },
+   
     {
         path: '/admin/user-management',
         component: UserManagement,
@@ -78,4 +74,9 @@ export const adminRoutes = [
         exact: true,
         isPrivate: false,
     },
+    {
+        path: '/admin/movie-management/:movieId',
+        component: MovieDetailPage,
+        exact: false
+    }
 ]

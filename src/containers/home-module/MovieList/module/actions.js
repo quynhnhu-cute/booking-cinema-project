@@ -1,4 +1,5 @@
-import { movieApi } from "apis/movieApi";
+
+import movieApi from "apis/movieApi";
 import {
   CLOSE_VIDEO,
   FETCH_ALL_MOVIE_FAIL,
