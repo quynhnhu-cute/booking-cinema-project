@@ -1,42 +1,48 @@
-import { movieApi } from "apis/movieApi";
 import Loader from "components/Loader/Loader";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Slider from "react-slick";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import {
   actCloseVideo,
-  actFetchMovieWithPage,
+  actFetchAllMovie,
   actHandleGetSrcVideo,
 } from "./module/actions";
 import "./MovieList.css";
 
 class MovieList extends Component {
- 
-
   renderMovieList(movieList) {
-    console.log(this.props);
     return movieList.map((movie) => {
       return (
-        <div className="col-3 my-3" key={movie.maPhim}>
+        <div className="carousel__item p-3" key={movie.maPhim}>
           <div className="card movielist__card">
             <div className="movielist__img">
-              <img className="card-img-top img-fluid" src={movie.hinhAnh}  />
-              <Link to={`/movie-detail/${movie.maPhim}`} className="movielist__linear"></Link>
+              <img className="card-img-top img-fluid" src={movie.hinhAnh} />
+              <Link
+                to={`/movie-detail/${movie.maPhim}`}
+                className="movielist__linear"
+              ></Link>
               <button
                 className="btnPlay"
                 data-toggle="modal"
                 data-target="#modelId"
                 onClick={() => this.props.handleGetSrcVideo(movie.trailer)}
               >
-                <img
-                  src="https://tix.vn/app/assets/img/icons/play-video.png"
-              
-                />
+                <img src="https://tix.vn/app/assets/img/icons/play-video.png" />
               </button>
             </div>
             <div className="card-body">
-              <h4 className={`text-left ${movie.tenPhim.length < 15 ? 'text-title': 'text-title-s'}` }>{movie.tenPhim}</h4>
+              <h4
+                className={`text-left ${
+                  movie.tenPhim.length < 45
+                    ? movie.tenPhim.length < 15
+                      ? "text-title"
+                      : "text-title-s"
+                    : "text-title-xs"
+                }`}
+              >
+                {movie.tenPhim}
+              </h4>
               <p className="card-text text-left">Thời lượng: </p>
             </div>
           </div>
@@ -54,21 +60,30 @@ class MovieList extends Component {
       slidesToScroll: 1,
       autoplay: false,
       autoplaySpeed: 3000,
+      rows: 2,
+      slidesPerRow: 4,
+      responsive: [
+        {
+          breakpoint: 600,
+          settings: {
+            dots: false,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: false,
+            autoplaySpeed: 3000,
+            rows: 2,
+            slidesPerRow: 2,
+          },
+        },
+      ],
     };
     if (this.props.loading) return <Loader />;
     return (
       <div className="container movielist">
         <Slider {...settings}>
-          <div className="carousel__item">
-            <div className="row">
-              {this.renderMovieList(this.props.movieList1)}
-            </div>
-          </div>
-          <div className="carousel__item">
-            <div className="row">
-              {this.renderMovieList(this.props.movieList2)}
-            </div>
-          </div>
+          {this.renderMovieList(this.props.movieList)}
         </Slider>
         {/* //Modal body */}
         <div
@@ -109,18 +124,17 @@ class MovieList extends Component {
     );
   }
   componentDidMount() {
-    this.props.fetchMovieWithPage();
+    this.props.fetchAllMovie();
   }
 }
 const mapStateToProps = (state) => ({
   loading: state.movieListReducer.loading,
-  movieList1: state.movieListReducer.movieList1,
-  movieList2: state.movieListReducer.movieList2,
+  movieList: state.movieListReducer.movieList,
   srcVideo: state.movieListReducer.srcVideo,
 });
 const mapDispatchToProps = (dispatch) => ({
-  fetchMovieWithPage: () => {
-    dispatch(actFetchMovieWithPage());
+  fetchAllMovie: () => {
+    dispatch(actFetchAllMovie());
   },
   handleGetSrcVideo: (srcVideo) => {
     dispatch(actHandleGetSrcVideo(srcVideo));

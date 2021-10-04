@@ -1,14 +1,13 @@
 import {
   CLOSE_VIDEO,
-  FETCH_MOVIE_PAGE_FAIL,
-  FETCH_MOVIE_PAGE_REQUEST,
-  FETCH_MOVIE_PAGE_SUCCESS,
+  FETCH_ALL_MOVIE_FAIL,
+  FETCH_ALL_MOVIE_REQUEST,
+  FETCH_ALL_MOVIE_SUCCESS,
   HANDLE_GET_SRC_VIDEO,
 } from "./types";
 
 const initialState = {
-  movieList1: [],
-  movieList2: [],
+  movieList: [],
   loading: true,
   srcVideo: "",
   err: "",
@@ -16,20 +15,20 @@ const initialState = {
 
 const movieListReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case FETCH_MOVIE_PAGE_REQUEST:
+    case FETCH_ALL_MOVIE_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_MOVIE_PAGE_SUCCESS:
-      const { data, data2 } = payload;
+    case FETCH_ALL_MOVIE_SUCCESS:
+      const data = payload;
       return {
         ...state,
-        movieList1: data.items,
-        movieList2: data2.items,
+        movieList: data,
+      
         loading: false,
       };
-    case FETCH_MOVIE_PAGE_FAIL:
+    case FETCH_ALL_MOVIE_FAIL:
       return { ...state, err: payload, loading: false };
     case HANDLE_GET_SRC_VIDEO:
       return { ...state, srcVideo: payload };

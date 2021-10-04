@@ -49,3 +49,11 @@ a:hover.text-link{
     text-align: left;
     color:red
 }
+
+/* Reponsive here */
+
+@media screen and (max-width:768px) {
+    .cinecomplex_container.container {
+        max-width: 100%;
+    }
+}

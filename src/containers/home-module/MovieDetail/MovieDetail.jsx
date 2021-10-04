@@ -14,7 +14,7 @@ class MovieDetail extends Component {
       <div className="moviedetail">
         <div className="container moviedetail__container">
           <div className="row moviedetail__top">
-            <div className="col-7 ">
+            <div className="col col-md-7">
               <div className="moviedetail__left moviedetail__box">
                 <div className="moviedetail__img">
                   <img src={this.props.movieDetail.hinhAnh} width="250px"  />
@@ -37,10 +37,8 @@ class MovieDetail extends Component {
                       this.props.movieDetail.ngayKhoiChieu
                     ).toLocaleDateString()}
                   </span>
-                  <h2>{this.props.movieDetail.tenPhim}</h2>
-                  <span>
-                    {this.props.movieDetail.lichChieu[0].thoiLuong} phút
-                  </span>
+                  <h2 className="text-white">{this.props.movieDetail.tenPhim}</h2>
+               
                 </div>
               </div>
             </div>
@@ -66,9 +64,9 @@ class MovieDetail extends Component {
               </div>
             </div>
           </div>
-          <div className="moviedetail__bot my-5">
-            <div className="row">
-              <div className="col-6">
+          <div className="moviedetail__bot my-5 mx-2">
+            <div className="row moviedetail__info">
+              <div className="col col-md-6">
                 <div className="moviedetail__row">
                   <p className="moviedetail__title">Ngày công chiếu</p>
                   <p className="moviedetail__content">
@@ -98,7 +96,7 @@ class MovieDetail extends Component {
                   <p className="moviedetail__content">{""}</p>
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col col-md-6">
                 <div className="row">
                   <div className="col">
                     <p className="moviedetail__title">Nội dung</p>
@@ -135,7 +133,7 @@ class MovieDetail extends Component {
               <div className="modal-body">
                 <iframe
                   id="videoSrc"
-                  src={`${this.props.srcVideo}/?autoplay=1`}
+                  src={`http://www.youtube.com/embed/${this.props.srcVideo}/?autoplay=1`}
                   width="100%"
                   height="500px"
                   frameBorder="0"

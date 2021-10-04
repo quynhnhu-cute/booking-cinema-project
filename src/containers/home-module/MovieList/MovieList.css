@@ -50,7 +50,9 @@
 .movielist .text-title-s{
     font-size: large
 }
-
+.movielist .text-title-xs{
+    font-size: 14px;
+}
 .movielist .card-body{
     height: 20%;
     width: 100%;
@@ -72,4 +74,14 @@
     text-align: right;
     font-size: 50px;
     background-color: transparent;
+}
+
+/* Reponsive here */
+
+/* Ipad screen (>768px) */
+
+@media screen and (max-width:768px) {
+    .container.movielist{
+        max-width: 100%;
+    }
 }

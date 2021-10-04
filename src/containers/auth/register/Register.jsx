@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { CheckCircleOutlined } from "@ant-design/icons";
 import userApi from "apis/userApi";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { GROUP_ID } from "settings/apiConfig";
 import "./Register.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
+import { connect } from "react-redux";
 
 //Validation
 const registerSchema = yup.object().shape({
@@ -28,10 +29,10 @@ const registerSchema = yup.object().shape({
     .matches(/(84|0[3|5|7|8|9])+([0-9]{8})\b/g, "(*) Số điện thoại không đúng"),
 });
 
-export default class Register extends Component {
+class Register extends Component {
   state = {
-    error: null
-  }
+    error: null,
+  };
   render() {
     const handleOnSubmit = (values) => {
       userApi
@@ -43,15 +44,15 @@ export default class Register extends Component {
         })
         .catch((err) => {
           this.setState({
-            error: 'Tài khoản hoặc email bị đã có, vui lòng kiểm tra lại'
-          })
+            error: "Tài khoản hoặc email bị đã có, vui lòng kiểm tra lại",
+          });
         });
     };
     const closeModal = () => {
       document.getElementById("closeModal").click();
     };
 
-    return (
+    return !this.props.currentUser ? (
       <div className="register">
         <div className="register__container container">
           <div className="h-100">
@@ -64,7 +65,11 @@ export default class Register extends Component {
                         <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                           Đăng kí
                         </p>
-                        {this.state.error && <div className="alert alert-danger">{this.state.error}</div>}
+                        {this.state.error && (
+                          <div className="alert alert-danger">
+                            {this.state.error}
+                          </div>
+                        )}
                         {/* FORMIK HERE */}
                         <Formik
                           initialValues={{
@@ -92,7 +97,11 @@ export default class Register extends Component {
                                     onChange={formikProps.handleChange}
                                   />
                                   <ErrorMessage name="taiKhoan">
-                                    {msg => <div  className="alert alert-danger">{msg}</div>}
+                                    {(msg) => (
+                                      <div className="alert alert-danger">
+                                        {msg}
+                                      </div>
+                                    )}
                                   </ErrorMessage>
                                 </div>
                               </div>
@@ -112,8 +121,12 @@ export default class Register extends Component {
                                     name="email"
                                     onChange={formikProps.handleChange}
                                   />
-                                   <ErrorMessage name="email">
-                                   {msg => <div  className="alert alert-danger">{msg}</div>}
+                                  <ErrorMessage name="email">
+                                    {(msg) => (
+                                      <div className="alert alert-danger">
+                                        {msg}
+                                      </div>
+                                    )}
                                   </ErrorMessage>
                                 </div>
                               </div>
@@ -133,8 +146,12 @@ export default class Register extends Component {
                                     name="matKhau"
                                     onChange={formikProps.handleChange}
                                   />
-                                   <ErrorMessage name="matKhau">
-                                   {msg => <div  className="alert alert-danger">{msg}</div>}
+                                  <ErrorMessage name="matKhau">
+                                    {(msg) => (
+                                      <div className="alert alert-danger">
+                                        {msg}
+                                      </div>
+                                    )}
                                   </ErrorMessage>
                                 </div>
                               </div>
@@ -172,8 +189,12 @@ export default class Register extends Component {
                                     name="hoTen"
                                     onChange={formikProps.handleChange}
                                   />
-                                   <ErrorMessage name="hoTen">
-                                   {msg => <div  className="alert alert-danger">{msg}</div>}
+                                  <ErrorMessage name="hoTen">
+                                    {(msg) => (
+                                      <div className="alert alert-danger">
+                                        {msg}
+                                      </div>
+                                    )}
                                   </ErrorMessage>
                                 </div>
                               </div>
@@ -193,8 +214,12 @@ export default class Register extends Component {
                                     name="soDt"
                                     onChange={formikProps.handleChange}
                                   />
-                                   <ErrorMessage name="soDt">
-                                   {msg => <div  className="alert alert-danger">{msg}</div>}
+                                  <ErrorMessage name="soDt">
+                                    {(msg) => (
+                                      <div className="alert alert-danger">
+                                        {msg}
+                                      </div>
+                                    )}
                                   </ErrorMessage>
                                 </div>
                               </div>
@@ -271,6 +296,14 @@ export default class Register extends Component {
           </div>
         </div>
       </div>
+    ) : (
+      <Redirect to="/" />
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  currentUser: state.authReducer.currentUser,
+});
+
+export default connect(mapStateToProps)(Register);

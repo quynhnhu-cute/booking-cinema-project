@@ -7,3 +7,8 @@ export const DefaultSelectedIndex = {
     MovieManagement: 2,
     ShowMovieManagement:3
 }
+
+export const LoaiNguoiDung = {
+    QUAN_TRI: 'QuanTri',
+    KHACH_HANG: 'KhachHang'
+}

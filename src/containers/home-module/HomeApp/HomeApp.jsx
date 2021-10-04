@@ -18,7 +18,7 @@ export default class HomeApp extends Component {
       <div className="homeApp w-100">
         <div className="container">
           <div className="row">
-            <div className="col-6 d-flex align-items-center justify-content-center text-left py-5">
+            <div className="col-12 col-lg-6 homeApp__box">
               <div>
                 <span className="homeApp__title">
                   Ứng dụng tiện lợi dành cho người yêu điện ảnh
@@ -50,7 +50,7 @@ export default class HomeApp extends Component {
                 </p>
               </div>
             </div>
-            <div className="col-6 d-flex align-items-center justify-content-center">
+            <div className="col-12 col-lg-6 homeApp__box">
               <div>
                 <img
                   src="https://tix.vn/app/assets/img/icons/mobile.png"
