@@ -6,7 +6,7 @@ import { GROUP_ID } from "settings/apiConfig";
 import {
   FAILED_STATUS_CODE,
   LoaiNguoiDung,
-  SUCCESS_STATUS_CODE,
+  SUCCESS_STATUS_CODE
 } from "settings/appConfig";
 import { openNotification } from "utils/notification";
 import "./UserModal.css";
@@ -79,7 +79,7 @@ class UserModal extends Component {
       });
       result = false;
     }
-    console.log(this.state.error)
+    
     return result;
   };
   handleOk = async () => {
@@ -102,7 +102,7 @@ class UserModal extends Component {
             } else {
               openNotification("error", "Thêm người dùng thất bại");
             }
-            console.log(error.response.data);
+            
           });
       } else {
         userApi

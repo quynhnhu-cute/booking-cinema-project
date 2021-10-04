@@ -52,12 +52,10 @@ export default class ShowMovieManagement extends Component {
   }
   render() {
     return (
-      <div className="container-fluid" style={{ margin: 0, padding: 0 }}>
+      // <div className="container-fluid" style={{ margin: 0, padding: 0 }}>
         <div className="row">
-          <div className="col-12">
-            <TopBar />
-          </div>
-          <div className="col-2">
+         
+          <div className="col-2" style={{paddingLeft: 0 }}>
             <SideBar defaultIndex={DefaultSelectedIndex.ShowMovieManagement} />
           </div>
           <div
@@ -92,7 +90,7 @@ export default class ShowMovieManagement extends Component {
             {this.state.openModal && <ShowMovieModal visible={true} movieInfo={this.state.movieInfo} getData={this.callBackData}/>}
           </div>
         </div>
-      </div>
+      // </div>
     );
   }
 }
