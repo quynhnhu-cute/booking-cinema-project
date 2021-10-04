@@ -1,32 +1,31 @@
 import { movieApi } from "apis/movieApi";
 import {
   CLOSE_VIDEO,
-  FETCH_MOVIE_PAGE_FAIL,
-  FETCH_MOVIE_PAGE_REQUEST,
-  FETCH_MOVIE_PAGE_SUCCESS,
+  FETCH_ALL_MOVIE_FAIL,
+  FETCH_ALL_MOVIE_REQUEST,
+  FETCH_ALL_MOVIE_SUCCESS,
   HANDLE_GET_SRC_VIDEO,
 } from "./types";
 
-const actFetchMovieWithPageSuccess = ({ data, data2 }) => ({
-  type: FETCH_MOVIE_PAGE_SUCCESS,
-  payload: { data, data2 },
+const actFetchAllMovieSuccess = (movieList) => ({
+  type: FETCH_ALL_MOVIE_SUCCESS,
+  payload: movieList,
 });
-const actFetchMovieWithPageRequest = () => ({
-  type: FETCH_MOVIE_PAGE_REQUEST,
+const actFetchAllMovieRequest = () => ({
+  type: FETCH_ALL_MOVIE_REQUEST,
 });
-const actFetchMovieWithPageFail = (err) => ({
-  type: FETCH_MOVIE_PAGE_FAIL,
+const actFetchAllMovieFail = (err) => ({
+  type: FETCH_ALL_MOVIE_FAIL,
   payload: err,
 });
-export const actFetchMovieWithPage = () => {
+export const actFetchAllMovie = () => {
   return async (dispatch) => {
-    dispatch(actFetchMovieWithPageRequest());
+    dispatch(actFetchAllMovieRequest());
     try {
-      const { data } = await movieApi.fetchMovieByPageApi(1, 8);
-      const { data: data2 } = await movieApi.fetchMovieByPageApi(2, 8);
-      dispatch(actFetchMovieWithPageSuccess({ data, data2 }));
+      const { data } = await movieApi.fetchAllMovieApi();
+      dispatch(actFetchAllMovieSuccess(data));
     } catch (err) {
-      dispatch(actFetchMovieWithPageFail(err))
+      dispatch(actFetchAllMovieFail(err));
     }
   };
 };

@@ -50,7 +50,9 @@
 .movielist .text-title-s{
     font-size: large
 }
-
+.movielist .text-title-xs{
+    font-size: 14px;
+}
 .movielist .card-body{
     height: 20%;
     width: 100%;
