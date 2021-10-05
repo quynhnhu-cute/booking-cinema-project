@@ -11,10 +11,12 @@ import { Link } from "react-router-dom";
 import {
   DefaultSelectedIndex,
   FAILED_STATUS_CODE,
+  LoaiNguoiDung,
   SUCCESS_STATUS_CODE
 } from "settings/appConfig";
 import { openNotification } from "utils/notification";
 import "./MovieManagement.css";
+import { Redirect } from "react-router";
 
 class MovieManagement extends Component {
   state = {
@@ -122,7 +124,7 @@ class MovieManagement extends Component {
   deleteMovie = (maPhim) => {
     this.setState({ isLoading: true });
     movieApi
-      .deleteMovieInfo(maPhim, this.props.token)
+      .deleteMovieInfo(maPhim, this.props.currentUser.accessToken)
       .then((result) => {
         if (result.status == SUCCESS_STATUS_CODE) {
           this.getAllMovieList();
@@ -141,45 +143,45 @@ class MovieManagement extends Component {
 
   render() {
     return (
-      // <div className="container-fluid" style={{ margin: 0, padding: 0 }}>
-      <div className="row">
-        <div className="col-2" style={{ paddingLeft: 0 }}>
-          <SideBar defaultIndex={DefaultSelectedIndex.MovieManagement} />
+     
+      this.props.currentUser && this.props.currentUser.maLoaiNguoiDung == LoaiNguoiDung.QUAN_TRI ? (<div className="row">
+      <div className="col-2" style={{ paddingLeft: 0 }}>
+        <SideBar defaultIndex={DefaultSelectedIndex.MovieManagement} />
+      </div>
+      <div className="col-9" style={{ marginLeft: "80px" }}>
+        <div className="row justify-content-end">
+          {" "}
+          <Link to="/admin/movie-management/-1">
+            <Button
+              color="white"
+              background="#1890ff"
+              icon={<FaPlus />}
+              onClick={this.createUser}
+            >
+              New
+            </Button>
+          </Link>
         </div>
-        <div className="col-9" style={{ marginLeft: "80px" }}>
-          <div className="row justify-content-end">
-            {" "}
-            <Link to="/admin/movie-management/-1">
-              <Button
-                color="white"
-                background="#1890ff"
-                icon={<FaPlus />}
-                onClick={this.createUser}
-              >
-                New
-              </Button>
-            </Link>
-          </div>
-          <div className="row mt-3">
-            {this.state.isLoading ? (
-              <Loader />
-            ) : (
-              <Table
-                columns={this.columns}
-                dataSource={this.state.movieList}
-                className="user-table"
-                bordered
-              />
-            )}
-          </div>
+        <div className="row mt-3">
+          {this.state.isLoading ? (
+            <Loader />
+          ) : (
+            <Table
+              columns={this.columns}
+              dataSource={this.state.movieList}
+              className="user-table"
+              bordered
+            />
+          )}
         </div>
       </div>
-      // </div>
+    </div>) : <Redirect to="/"/>
+     
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  token: state.authReducer.currentUser.accessToken,
+  currentUser: state.authReducer.currentUser,
 });
 export default connect(mapStateToProps, null)(MovieManagement);

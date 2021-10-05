@@ -32,7 +32,8 @@ class UserModal extends Component {
       }
     })
     let result = true;
-    const { taiKhoan, email, matKhau, hoTen, soDt } = this.state.userInfo;
+
+     const { taiKhoan, email, matKhau, hoTen, soDt , maLoaiNguoiDung} = this.state.userInfo ?? {};
     
     let emailReg =
       /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -79,13 +80,18 @@ class UserModal extends Component {
       });
       result = false;
     }
+    if(!maLoaiNguoiDung && this.isNew){
+      await this.setState({userInfo: {...this.state.userInfo, maLoaiNguoiDung: LoaiNguoiDung.KHACH_HANG}});
+    }
     
     return result;
   };
   handleOk = async () => {
     
     if(await this.validateForm()){
+      console.log(this.state.userInfo)
       this.setState({ isUpdating: true });
+      
       if (this.isNew) {
         userApi
           .newUser(this.state.userInfo, this.props.currentUser.accessToken)

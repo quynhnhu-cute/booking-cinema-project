@@ -7,10 +7,12 @@ import Button from "components/StandardButton/Button";
 import React, { Component } from "react";
 import { FaEdit, FaPlus, FaTrashAlt } from "react-icons/fa";
 import { connect } from "react-redux";
+import { Redirect } from "react-router";
 import { GROUP_ID } from "settings/apiConfig";
 import {
   DefaultSelectedIndex,
   FAILED_STATUS_CODE,
+  LoaiNguoiDung,
   SUCCESS_STATUS_CODE,
 } from "settings/appConfig";
 import { openNotification } from "utils/notification";
@@ -168,7 +170,7 @@ class UserManagement extends Component {
     this.getListUserPagination();
   }
   render() {
-    return (
+    return this.props.currentUser && this.props.currentUser.maLoaiNguoiDung == LoaiNguoiDung.QUAN_TRI ? (
       <React.Fragment>
         <div className="row">
           <div className="col-2" style={{ paddingLeft: 0 }}>
@@ -223,7 +225,7 @@ class UserManagement extends Component {
           />
         )}
       </React.Fragment>
-    );
+    ) : <Redirect to="/"/>;
   }
 }
 

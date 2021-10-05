@@ -1,20 +1,22 @@
+import { Pagination } from "antd";
 import movieApi from "apis/movieApi";
 import SideBar from "components/SideBar/SideBar";
-import TopBar from "components/TopBar/TopBar";
+import { connect } from "react-redux";
 import React, { Component } from "react";
-import { DefaultSelectedIndex } from "settings/appConfig";
+import { Redirect } from "react-router";
+import { DefaultSelectedIndex, LoaiNguoiDung } from "settings/appConfig";
 import { openNotification } from "utils/notification";
-import "./ShowMovieManagement.css";
-import { Pagination } from "antd";
 import ShowMovieModal from "./show-movie-modal/ShowMovieModal";
-export default class ShowMovieManagement extends Component {
+import "./ShowMovieManagement.css";
+
+class ShowMovieManagement extends Component {
   state = {
     isLoading: false,
     movieList: null,
     currentPage: 1,
     totalCount: 1,
     openModal: false,
-    movieInfo: null
+    movieInfo: null,
   };
   getMovieListPagination = () => {
     this.setState({ isLoading: true });
@@ -26,7 +28,6 @@ export default class ShowMovieManagement extends Component {
           isLoading: false,
           totalCount: result.data.totalCount,
         });
-       
       })
       .catch((error) => {
         openNotification("error", "Dữ liệu hiện đang lỗi");
@@ -43,54 +44,76 @@ export default class ShowMovieManagement extends Component {
     this.getMovieListPagination();
   };
 
-  addShowMovie = (maPhim, hinhAnh, tenPhim) =>{
-      this.setState({movieInfo: {maPhim: maPhim, hinhAnh: hinhAnh, tenPhim: tenPhim}, openModal: true});  
-  }
+  addShowMovie = (maPhim, hinhAnh, tenPhim) => {
+    this.setState({
+      movieInfo: { maPhim: maPhim, hinhAnh: hinhAnh, tenPhim: tenPhim },
+      openModal: true,
+    });
+  };
 
-  callBackData = (childData) =>{
-    this.setState({openModal: false});
-  }
+  callBackData = (childData) => {
+    this.setState({ openModal: false });
+  };
   render() {
-    return (
-      // <div className="container-fluid" style={{ margin: 0, padding: 0 }}>
-        <div className="row">
-         
-          <div className="col-2" style={{paddingLeft: 0 }}>
-            <SideBar defaultIndex={DefaultSelectedIndex.ShowMovieManagement} />
-          </div>
-          <div
-            className="col-10"
-            style={{ paddingLeft: "50px", paddingTop: "50px" }}
-          >
-            <div className="row">
-              {this.state.movieList &&
-                this.state.movieList.map((movie) => {
-                  return (
-                    <div className="col-3 card pt-3">
-                      <img
-                        className="card-img-top film-image"
-                        src={movie.hinhAnh}
-                        alt={movie.biDanh}
-                      />
-                      <div className="card-body">
-                        <h4 className="card-title">{movie.tenPhim}</h4>
-                        <button className="btn btn-success" onClick={() => this.addShowMovie(movie.maPhim, movie.hinhAnh, movie.tenPhim)}>
-                          Thêm lịch chiếu
-                        </button>
-                      </div>
-                    </div>
-                  );
-                })}
-            </div>
-            <Pagination
-              total={this.state.totalCount}
-              className="mt-4 d-flex justify-content-center"
-              onChange={this.onChangePage}
-            />
-            {this.state.openModal && <ShowMovieModal visible={true} movieInfo={this.state.movieInfo} getData={this.callBackData}/>}
-          </div>
+    return this.props.currentUser && this.props.currentUser.maLoaiNguoiDung == LoaiNguoiDung.QUAN_TRI ? (
+      <div className="row">
+        <div className="col-2" style={{ paddingLeft: 0 }}>
+          <SideBar defaultIndex={DefaultSelectedIndex.ShowMovieManagement} />
         </div>
-      // </div>
+        <div
+          className="col-10"
+          style={{ paddingLeft: "50px", paddingTop: "50px" }}
+        >
+          <div className="row">
+            {this.state.movieList &&
+              this.state.movieList.map((movie) => {
+                return (
+                  <div className="col-3 card pt-3">
+                    <img
+                      className="card-img-top film-image"
+                      src={movie.hinhAnh}
+                      alt={movie.biDanh}
+                    />
+                    <div className="card-body">
+                      <h4 className="card-title">{movie.tenPhim}</h4>
+                      <button
+                        className="btn btn-success"
+                        onClick={() =>
+                          this.addShowMovie(
+                            movie.maPhim,
+                            movie.hinhAnh,
+                            movie.tenPhim
+                          )
+                        }
+                      >
+                        Thêm lịch chiếu
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
+          <Pagination
+            total={this.state.totalCount}
+            className="mt-4 d-flex justify-content-center"
+            onChange={this.onChangePage}
+          />
+          {this.state.openModal && (
+            <ShowMovieModal
+              visible={true}
+              movieInfo={this.state.movieInfo}
+              getData={this.callBackData}
+            />
+          )}
+        </div>
+      </div>
+    ) : (
+      <Redirect to="/" />
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  currentUser: state.authReducer.currentUser,
+});
+export default connect(mapStateToProps, null)(ShowMovieManagement);
