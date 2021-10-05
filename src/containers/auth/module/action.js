@@ -22,8 +22,7 @@ export const actLogin = (user, history) =>{
         userApi.loginApi(user).then(response =>{
             dispatch(actLoginSuccess(response.data));
             history.push('/');
-            console.log(response);
-            console.log(history);
+           
         }).catch(error =>{
             dispatch(actLoginFail('Tên đăng nhập hoặc mật khẩu ko đúng'))
             console.log(error);

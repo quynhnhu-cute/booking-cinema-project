@@ -24,14 +24,16 @@ export default class SideBar extends Component {
     render() {
         return (
             <div className="bar-container">
-                <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
+                {/* <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
                     {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
-                </Button>
+                </Button> */}
                 <Menu
                     defaultSelectedKeys={[`${this.props.defaultIndex}`]}
                     mode="inline"
                     inlineCollapsed={this.state.collapsed}
                     className="menu"
+                    style={{ marginTop: '30px' }}
+                    
                 >
                     <Menu.Item key="1" icon={<UserOutlined  />}>
                         <Link to="/admin/user-management">Quản lí người dùng</Link>

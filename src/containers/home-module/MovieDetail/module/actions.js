@@ -1,4 +1,4 @@
-import { movieApi } from "apis/movieApi";
+import  movieApi  from "apis/movieApi";
 
 const {
   FETCH_MOVIE_DETAIL_REQUEST,
