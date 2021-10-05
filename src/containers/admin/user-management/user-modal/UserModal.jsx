@@ -88,7 +88,7 @@ class UserModal extends Component {
       this.setState({ isUpdating: true });
       if (this.isNew) {
         userApi
-          .newUser(this.state.userInfo, this.props.currentUser.token)
+          .newUser(this.state.userInfo, this.props.currentUser.accessToken)
           .then((result) => {
             if (result.status == SUCCESS_STATUS_CODE) {
               this.setState({ isModalVisible: false });
@@ -106,7 +106,7 @@ class UserModal extends Component {
           });
       } else {
         userApi
-          .updateUserApi(this.state.userInfo, this.props.currentUser.token)
+          .updateUserApi(this.state.userInfo, this.props.currentUser.accessToken)
           .then((result) => {
             if (result.status == SUCCESS_STATUS_CODE) {
               openNotification("success", "Cập nhật người dùng thành công");
