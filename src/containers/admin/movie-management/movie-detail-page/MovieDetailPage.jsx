@@ -48,26 +48,26 @@ class MovieDetailPage extends Component {
     });
     const { tenPhim, biDanh, trailer, moTa, danhGia, hinhAnh } =
       this.state.movieInfo;
-    if (!tenPhim || tenPhim.length < 3 || tenPhim.length > 10) {
+    if (!tenPhim || tenPhim.length < 3 || tenPhim.length > 100) {
       // set state is asynchronous function so need to use await for set state .
       await this.setState({
         error: {
           ...this.state.error,
-          tenPhimError: "Tên phim phải từ 3 đến 10 kí tự",
+          tenPhimError: "Tên phim phải từ 3 kí tự",
         },
       });
       result = false;
     }
-    if (!biDanh || biDanh.length < 3 || biDanh.length > 10) {
+    if (!biDanh || biDanh.length < 3 || biDanh.length > 100) {
       await this.setState({
         error: {
           ...this.state.error,
-          biDanhError: "Bí danh phải từ 3 đến 10 kí tự",
+          biDanhError: "Bí danh phải từ 3  kí tự",
         },
       });
       result = false;
     }
-    if (!trailer || trailer.length < 3 || trailer.length > 50) {
+    if (!trailer || trailer.length < 3 || trailer.length > 100) {
       await this.setState({
         error: {
           ...this.state.error,
