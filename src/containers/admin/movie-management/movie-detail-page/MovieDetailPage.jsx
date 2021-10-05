@@ -67,11 +67,11 @@ class MovieDetailPage extends Component {
       });
       result = false;
     }
-    if (!trailer || trailer.length < 3 || trailer.length > 10) {
+    if (!trailer || trailer.length < 3 || trailer.length > 50) {
       await this.setState({
         error: {
           ...this.state.error,
-          trailerError: "Trailer phải từ 3 đến 10 kí tự",
+          trailerError: "Trailer phải từ 3 đến 50 kí tự",
         },
       });
       result = false;
