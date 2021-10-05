@@ -22,7 +22,7 @@ class UserModal extends Component {
   isNew = this.props.isNew;
 
   validateForm = async () => {
-    this.setState({
+    await this.setState({
       error: {
       taiKhoanError: "",
       hoTenError: "",
@@ -82,6 +82,7 @@ class UserModal extends Component {
     }
     if(!maLoaiNguoiDung && this.isNew){
       await this.setState({userInfo: {...this.state.userInfo, maLoaiNguoiDung: LoaiNguoiDung.KHACH_HANG}});
+      result = false;
     }
     
     return result;
