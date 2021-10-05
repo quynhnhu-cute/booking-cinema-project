@@ -280,9 +280,6 @@ class MovieDetailPage extends Component {
     return (
       <div className="container-fluid" style={{ margin: 0, padding: 0 }}>
         <div className="row">
-          <div className="col-12">
-            <TopBar />
-          </div>
           <div className="col-2">
             <SideBar defaultIndex={DefaultSelectedIndex.MovieManagement} />
           </div>
