@@ -51,7 +51,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 15%;
+    width: 20%;
     text-align: left;
 }
 .searchtool .searchtool__item .dropdown__button::after{

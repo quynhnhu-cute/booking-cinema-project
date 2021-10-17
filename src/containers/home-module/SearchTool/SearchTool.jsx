@@ -12,7 +12,7 @@ class SearchTool extends Component {
   state = {
     valuePhim: "Phim",
     valueRap: "Rạp",
-    valueNgay: "Ngày xem",
+    valueNgay: "Ngày chiếu, giờ chiếu",
     valueSuat: "Suất chiếu",
     showTimeId: "",
   };
@@ -121,6 +121,7 @@ class SearchTool extends Component {
                 : this.props.dateList.map((date) => {
                     //date là lịch chiếu phim theo rạp đã chọn
                     //chỗ này lấy được mã lịch chiếu
+
                     return (
                       <a
                         className="dropdown-item"
@@ -128,38 +129,18 @@ class SearchTool extends Component {
                         onClick={() => {
                           this.getShowTimeId(date.maLichChieu);
                           this.handleChangeValueNgay(
-                            new Date(
-                              date.ngayChieuGioChieu
-                            ).toLocaleDateString()
+                           `${new Date(
+                            date.ngayChieuGioChieu
+                          ).toLocaleDateString()} - ${new Date(
+                            date.ngayChieuGioChieu
+                          ).toLocaleTimeString()} - ${date.tenRap}`
                           );
                         }}
                       >
-                        {new Date(date.ngayChieuGioChieu).toLocaleDateString()}
+                        {new Date(date.ngayChieuGioChieu).toLocaleDateString()} -  {new Date(date.ngayChieuGioChieu).toLocaleTimeString()} - {date.tenRap}
                       </a>
                     );
                   })}
-            </div>
-          </div>
-          <div div className="dropdown searchtool__item">
-            <div
-              className="dropdown__button dropdown-toggle"
-              type="button"
-              id="showTimeListDropdown"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Suất chiếu
-            </div>
-            <div
-              className="dropdown-menu"
-              aria-labelledby="showTimeListDropdown"
-            >
-              {this.props.showTimeList.length === 0 ? (
-                "Vui lòng chọn phim,rạp, ngày xem"
-              ) : (
-                <a className="dropdown-item" href="#"></a>
-              )}
             </div>
           </div>
           <Link to={this.state.showTimeId === ''? "" : `/seat-plan/${this.state.showTimeId}`} className="btn btn-secondary searchtool__item">MUA VÉ NGAY</Link>
